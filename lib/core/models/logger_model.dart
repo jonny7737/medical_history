@@ -12,12 +12,44 @@ class LoggerModel {
     prefs = await _prefs;
   }
 
+  void runLater(String sectionName) async {
+    _prefs.then((SharedPreferences prefs) {
+      if (prefs.containsKey('MH-' + sectionName)) return;
+      prefs.setBool('MH-' + sectionName, false);
+    });
+  }
+
+  List<String> allKeys() {
+    List<String> keyList = [];
+    var keys = prefs.getKeys().toList();
+    for (var key in keys) {
+      if (key.startsWith('MH-')) {
+        keyList.add(key.split('-')[1]);
+      }
+    }
+    return keyList;
+  }
+
+  void initSectionPref(String sectionName) async {
+    if (prefs == null) {
+      runLater(sectionName);
+      return;
+    }
+    if (prefs.containsKey('MH-' + sectionName)) return;
+    prefs.setBool('MH-' + sectionName, false);
+    return;
+  }
+
+  void removeSection(String sectionName) => prefs.remove('MH-' + sectionName);
+
   bool isEnabled(String sectionName) {
+    sectionName = 'MH-' + sectionName;
     bool enabled = prefs?.getBool(sectionName);
     return enabled ?? false;
   }
 
   void saveSetting(String sectionName, bool value) {
+    sectionName = 'MH-' + sectionName;
     prefs.setBool(sectionName, value);
     return;
   }

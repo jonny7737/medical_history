@@ -5,6 +5,19 @@ import 'package:medical_history/core/locator.dart';
 class LoggerProvider with ChangeNotifier {
   final LoggerModel _loggerModel = locator();
 
+  List<String> listOfSectionNames() {
+    return _loggerModel.allKeys();
+  }
+
+  void initSection(String sectionName) {
+    return _loggerModel.initSectionPref(sectionName);
+  }
+
+  void removeSection(String sectionName) {
+    _loggerModel.removeSection(sectionName);
+    notifyListeners();
+  }
+
   bool get isInitialized => _loggerModel.prefs != null;
 
   bool isLogging(String sectionName) => _loggerModel.isEnabled(sectionName);

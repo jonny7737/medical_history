@@ -10,6 +10,13 @@ class UserModel {
     init();
   }
 
+  init() async {
+    if (!_allowWriteFile) await requestPermissions();
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  bool get hasPermission => _allowWriteFile;
+
   requestPermissions() async {
     if (_awaitingPermission) return;
     _awaitingPermission = true;
@@ -18,11 +25,6 @@ class UserModel {
       // Either the permission was already granted before or the user just granted it.
       _allowWriteFile = true;
     }
-  }
-
-  init() async {
-    if (!_allowWriteFile) await requestPermissions();
-    prefs = await SharedPreferences.getInstance();
   }
 
   static const String _IS_LOGGED_IN = "is_logged_in";
@@ -41,32 +43,33 @@ class UserModel {
     }
   }
 
-  Future<void> logout() async {
-    if (prefs == null) return;
+  void logout() {
+    if (!_allowWriteFile || prefs == null) return;
     prefs.remove(_IS_LOGGED_IN);
     prefs.remove(_NAME);
     prefs.remove(_EXPIRE);
     prefs.remove(_LOGIN_AT);
   }
 
-  Future<void> login(String name) async {
-    if (prefs == null) return;
-    if (await isLoggedIn() == true) {
-      return;
+  bool login(String name) {
+    if (!_allowWriteFile || prefs == null) return false;
+    if (isLoggedIn() == true) {
+      return true;
     }
     var now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
     /**
      * Require login at least once per day
      */
     var xp = now + (24 * 60 * 60);
-    await prefs.setBool(_IS_LOGGED_IN, true);
-    await prefs.setString(_NAME, name);
-    await prefs.setInt(_EXPIRE, xp);
-    await prefs.setInt(_LOGIN_AT, now);
+    prefs.setBool(_IS_LOGGED_IN, true);
+    prefs.setString(_NAME, name);
+    prefs.setInt(_EXPIRE, xp);
+    prefs.setInt(_LOGIN_AT, now);
+    return true;
   }
 
-  Future<bool> isLoggedIn() async {
-    if (prefs == null) await init();
+  bool isLoggedIn() {
+    if (!_allowWriteFile || prefs == null) init();
     var expirey = prefs?.getInt(_EXPIRE);
     if (expirey == null) {
       logout();
@@ -78,7 +81,7 @@ class UserModel {
     return prefs?.containsKey(_IS_LOGGED_IN);
   }
 
-  Future<String> getName() async {
+  String getName() {
     return prefs?.getString(_NAME);
   }
 }

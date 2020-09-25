@@ -1,24 +1,27 @@
 import 'package:flutter/foundation.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:package_info/package_info.dart';
-import 'package:medical_history/core/mixins/logger.dart';
+import 'package:medical_history/core/services/logger.dart';
 
-class ScreenInfoViewModel with Logger {
+class ScreenInfoViewModel {
+  final Logger _l = locator();
   List<String> _setupCompleted = [];
 
   String appName;
   String packageName;
   String version;
   String buildNumber;
+  String sectionName;
 
   ScreenInfoViewModel() {
-    setLogging(true);
     init();
-    log('isSetupCompleted: ${_setupCompleted.toString()}',
-        linenumber: lineNumber(StackTrace.current));
+    _l.log(sectionName, 'isSetupCompleted: ${_setupCompleted.toString()}',
+        linenumber: _l.lineNumber(StackTrace.current));
   }
 
   init() async {
     if (_setupCompleted.contains('I')) return;
+    sectionName = this.runtimeType.toString();
     var packageInfo = await PackageInfo.fromPlatform();
     appName = packageInfo.appName;
     packageName = packageInfo.packageName;
