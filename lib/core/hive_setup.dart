@@ -6,10 +6,8 @@ import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';
 import 'package:medical_history/core/models/med_data.dart';
 import 'package:medical_history/core/services/logger.dart';
-import 'package:medical_history/core/services/secure_storage.dart';
 
 class HiveSetup {
-  final SecureStorage _ss = locator();
   final Logger _l = locator();
   final String sectionName = 'HiveSetup';
 
@@ -17,20 +15,16 @@ class HiveSetup {
     _l.initSectionPref(sectionName);
     _l.log(sectionName, 'HiveSetup started [PURGE REQUIRED: $purge');
 
-    _ss.sBuilder('I see. I see.');
-
     _initializeHive(purge: purge);
   }
 
   void _initializeHive({bool purge = false}) async {
-    _ss.sBuilder('I do love thee.');
     _l.log(sectionName, 'Initializing Hive, Purge All Data: $purge');
     await Hive.initFlutter(kHiveDirectory);
 
     Hive.registerAdapter(MedDataAdapter());
     Hive.registerAdapter(DoctorDataAdapter());
 
-    _ss.sBuilder('I do so love thee.');
     if (purge) {
       Future.wait([
         Hive.deleteBoxFromDisk(kMedHiveBox),
@@ -38,7 +32,6 @@ class HiveSetup {
       ]);
       _initializeFakeData();
     }
-    _ss.sBuilder('ShmIly!!!');
     _l.log(sectionName, 'HiveSetup complete');
   }
 

@@ -19,8 +19,6 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
     final user = useProvider(userProvider);
     final _model = useProvider(homeViewModel);
 
-    final String userName = user.name;
-
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
 
@@ -34,12 +32,12 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
           );
         },
       ),
-      title: userName == null
+      title: user.name == null
           ? Text('Not Logged In')
           : Container(
               width: context.widthPct(0.30),
               child: Text(
-                'Welcome $userName',
+                'Welcome ${user.name}',
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),

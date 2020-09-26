@@ -16,9 +16,10 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   /// Order is significant.  This may break later.
-  locator.registerSingleton<SecureStorage>(SecureStorage());
+  /// TODO: Learn how to synchronize GetIt startup
   locator.registerSingleton<LoggerModel>(LoggerModel());
   locator.registerSingleton<Logger>(Logger());
+  locator.registerSingleton<SecureStorage>(SecureStorage());
   locator.registerSingleton<UserModel>(UserModel(), signalsReady: false);
   locator.registerSingleton<ScreenInfoViewModel>(ScreenInfoViewModel());
 

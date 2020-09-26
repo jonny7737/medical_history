@@ -7,6 +7,7 @@ const String doctorRoute = 'doctorRoute';
 const String addDoctorRoute = 'addDoctorRoute';
 const String loggerMenuRoute = 'loggerMenuRoute';
 const String medsLoadedRoute = 'medsLoadedRoute';
+const String keygenRoute = 'keygenRoute';
 
 const String LOGGING_APP = 'MyApp';
 

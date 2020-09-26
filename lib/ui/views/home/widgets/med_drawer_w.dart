@@ -185,6 +185,18 @@ class MedDrawer extends HookWidget {
                 );
               },
             ),
+            if (isDebugMode())
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text(
+                  'Painter Testing',
+                  style: TextStyle(fontSize: fontSize),
+                ),
+                onTap: () {
+                  toggleDrawer();
+                  Navigator.pushNamed(context, keygenRoute);
+                },
+              ),
           ],
         ),
       ),

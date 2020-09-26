@@ -4,6 +4,7 @@ import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/models/logger_model.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/views/login/login_view.dart';
+import 'package:medical_history/ui/views/keygen/keygen_view.dart';
 import 'package:medical_history/ui/views/setup/setup_screen_info.dart';
 // import 'package:medical_history/ui/views/add_med/add_med_view.dart';
 // import 'package:medical_history/ui/views/add_med/meds_loaded_sub_view.dart';
@@ -133,6 +134,10 @@ class Router {
       case addDoctorRoute:
         return MaterialPageRoute<bool>(
           builder: (_) => AddDoctorForm(),
+        );
+      case keygenRoute:
+        return MaterialPageRoute<bool>(
+          builder: (_) => KeyGenView(),
         );
       default:
         return MaterialPageRoute(

@@ -9,12 +9,14 @@ import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/secure_storage.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:sized_context/sized_context.dart';
 
 class SplashView extends HookWidget {
   final Logger _l = locator();
   final ScreenInfoViewModel _s = locator();
+  final SecureStorage _ss = locator();
 
   @override
   Widget build(BuildContext context) {
@@ -67,25 +69,31 @@ class SplashView extends HookWidget {
     );
   }
 
-  void runLater(BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) {
-    Future.delayed(Duration(seconds: 2)).then((_) {
-      if (context == null) return;
+  void runLater(
+      BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
+    await Future.delayed(Duration(seconds: 1));
+    if (context == null) return;
 
-      if (!hasPermission) {
-        _l.log(sectionName, 'Rebuilding SplashView', always: false);
-        (context as Element).markNeedsBuild();
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          (context as Element).rebuild();
-        });
-        return;
-      }
-      if (shouldLogin) {
+    if (!hasPermission) {
+      _l.log(sectionName, 'Rebuilding SplashView', always: false);
+      (context as Element).markNeedsBuild();
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        (context as Element).rebuild();
+      });
+      return;
+    }
+    if (!await _ss.doctorBoxKeySet) {
+      _l.log(sectionName, 'Executing KeyGen Route', always: false);
+      Navigator.pushNamed(context, keygenRoute).then((value) {
         _l.log(sectionName, 'Executing Login Route', always: false);
         Navigator.pushReplacementNamed(context, loginRoute);
-      } else {
-        _l.log(sectionName, 'Executing Home Route', always: false);
-        Navigator.pushReplacementNamed(context, homeRoute);
-      }
-    });
+      });
+    } else if (shouldLogin) {
+      _l.log(sectionName, 'Executing Login Route', always: false);
+      Navigator.pushReplacementNamed(context, loginRoute);
+    } else {
+      _l.log(sectionName, 'Executing Home Route', always: false);
+      Navigator.pushReplacementNamed(context, homeRoute);
+    }
   }
 }

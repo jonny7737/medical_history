@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:medical_history/core/models/user_model.dart';
 import 'package:medical_history/core/locator.dart';
@@ -11,9 +9,6 @@ class UserProvider with ChangeNotifier {
     init();
   }
 
-  String _name;
-  bool _isLoggedIn;
-  Timer loggedInTimer;
   int _secondsToLogout;
 
   bool get hasPermission => userModel.hasPermission;
@@ -26,8 +21,8 @@ class UserProvider with ChangeNotifier {
     _refreshAllStates();
   }
 
-  bool get isLoggedIn => _isLoggedIn;
-  String get name => _name;
+  bool get isLoggedIn => userModel.isLoggedIn();
+  String get name => userModel.getName();
 
   int get logoutTime {
     if (userModel.secondsToLogout() != _secondsToLogout) {
@@ -45,25 +40,16 @@ class UserProvider with ChangeNotifier {
   }
 
   _refreshAllStates() {
-    _isLoggedIn = userModel.isLoggedIn();
-    _name = userModel.getName();
     notifyListeners();
   }
 
-  login(String userName) async {
-    userName = userName.trim();
-    userModel.login(userName);
-    await _refreshAllStates();
-  }
-
-  logout() async {
-    userModel.logout();
+  login(String userName) {
+    userModel.login(userName.trim());
     _refreshAllStates();
   }
 
-  @override
-  void dispose() {
-    loggedInTimer.cancel();
-    super.dispose();
+  logout() {
+    userModel.logout();
+    _refreshAllStates();
   }
 }

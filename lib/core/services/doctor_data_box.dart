@@ -15,10 +15,9 @@ class DoctorDataBox with ChangeNotifier {
 
   static const int retryTime = 100; // milliseconds to wait for !_initializing
   static int bke = (100 / 4).round() + 7;
-  static const int bks = 0;
+  static int bks = (7 * (bke - 32) / 110 * 548).round();
 
   Box<DoctorData> _box;
-  Uint8List _boxKey;
   bool _initialized = false;
   bool _initializing = false;
   bool _lockCheck = false;
@@ -32,7 +31,6 @@ class DoctorDataBox with ChangeNotifier {
   void _init() async {
     if (_initializing) return;
     _initializing = true;
-    await setBoxKey();
     _l.log(sectionName, 'Waiting for Hive Box init..',
         linenumber: _l.lineNumber(StackTrace.current));
     await initializeHiveBox();
@@ -41,14 +39,6 @@ class DoctorDataBox with ChangeNotifier {
     /// This is required because Hive.openBox()
     ///  does not emit a BoxEvent
     notifyListeners();
-  }
-
-  Future setBoxKey() async {
-    do {
-      await Future.delayed(Duration(milliseconds: 100)).then((_) {
-        _boxKey = _ss.doctorBoxKey;
-      });
-    } while (_boxKey == null);
   }
 
   Future<DoctorData> getByKey(key) async {
@@ -110,10 +100,17 @@ class DoctorDataBox with ChangeNotifier {
   }
 
   Future<void> initializeHiveBox() async {
+    Uint8List _boxKey;
+
     if (_lockCheck) return;
     _lockCheck = true;
     _l.log(sectionName, 'Is box open? ${Hive.isBoxOpen(kDoctorHiveBox)}');
     _l.log(sectionName, 'awaiting Hive Box');
+
+    do {
+      await Future.delayed(Duration(milliseconds: 100));
+      _boxKey = _ss.doctorBoxKey;
+    } while (_boxKey == null);
 
     _box = await Hive.openBox<DoctorData>(kDoctorHiveBox,
         encryptionCipher: HiveAesCipher(_boxKey.sublist(bks, bke)));
@@ -123,6 +120,7 @@ class DoctorDataBox with ChangeNotifier {
     } else
       _l.log(sectionName, 'No Hive Box');
     _lockCheck = false;
+    _boxKey = null;
   }
 
   Future deleteBox() async {

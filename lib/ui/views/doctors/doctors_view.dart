@@ -15,6 +15,12 @@ class DoctorsView extends StatelessWidget {
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
     _l.log(sectionName, 'Building');
+
+    if (_model.numberOfDoctors == 0) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        Navigator.pushNamed(context, addDoctorRoute);
+      });
+    }
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
