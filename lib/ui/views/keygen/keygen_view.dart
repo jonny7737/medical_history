@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:medical_history/ui/views/keygen/painter.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sized_context/sized_context.dart';
 
 class KeyGenView extends StatefulWidget {
@@ -23,8 +23,8 @@ class _KeyGenViewState extends State<KeyGenView> {
   void panUpdate(DragUpdateDetails details) {
     fingerPainter.appendStroke(details.localPosition);
     if (_ss.ccBuilder(details.hashCode.remainder(255))) {
-      SystemSound.play(SystemSoundType.click);
-      Navigator.pop(context);
+      // SystemSound.play(SystemSoundType.click);
+      alertUser().show().then((_) => Navigator.pop(context));
     }
   }
 
@@ -83,6 +83,60 @@ class _KeyGenViewState extends State<KeyGenView> {
                   child: Text('You do not need to remember it.',
                       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))),
         ],
+      ),
+    );
+  }
+
+  Alert alertUser() {
+    return Alert(
+      buttons: [
+        DialogButton(
+          onPressed: () => Navigator.pop(context),
+          color: Theme.of(context).primaryColor,
+          child: Text(
+            "Continue",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        )
+      ],
+      style: alertStyle,
+      type: AlertType.success,
+      context: context,
+      title: "SUCCESS!!!",
+      desc: "You have successfully created your document security keys.",
+      alertAnimation: fadeAlertAnimation,
+    );
+  }
+
+  var alertStyle = AlertStyle(
+    animationType: AnimationType.fromTop,
+    isCloseButton: false,
+    isOverlayTapDismiss: false,
+    descStyle: TextStyle(fontWeight: FontWeight.bold),
+    animationDuration: Duration(milliseconds: 500),
+    alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0),
+      side: BorderSide(
+        color: Colors.grey,
+      ),
+    ),
+    titleStyle: TextStyle(
+      color: Colors.yellow, // TODO: need a grey option here for light mode
+      fontWeight: FontWeight.bold,
+    ),
+    constraints: BoxConstraints.expand(width: 350),
+    overlayColor: Color(0x75000000),
+    backgroundColor: Colors.grey,
+    alertElevation: 10,
+    alertAlignment: Alignment.center,
+  );
+
+  Widget fadeAlertAnimation(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return Align(
+      child: FadeTransition(
+        opacity: animation,
+        child: child,
       ),
     );
   }

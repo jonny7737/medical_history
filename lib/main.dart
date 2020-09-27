@@ -34,9 +34,7 @@ class MyApp extends HookWidget {
       color: Colors.yellow[100],
       debugShowCheckedModeBanner: false,
       title: 'Medical History',
-      theme: useProvider(themeDataProvider).themeData.copyWith(
-          // textTheme: Typography.blackMountainView,
-          ),
+      theme: useProvider(themeDataProvider).themeData,
       initialRoute: setupRoute,
       onGenerateRoute: Router.generateRoute,
     );
