@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/services/logger.dart';
-import 'package:medical_history/ui/views/home/home_view.dart';
+import 'package:medical_history/ui/views/home/riverpods.dart';
 import 'package:sized_context/sized_context.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
@@ -48,10 +48,10 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
           icon: Icon(Icons.add_circle, color: Colors.white),
           padding: EdgeInsets.all(0.0),
           onPressed: () async {
-            _l.log(sectionName, 'Number of Doctors available: ${_model.numberOfDoctors}');
+            // _l.log(sectionName, 'Number of Doctors available: ${_model.numberOfDoctors}');
             if (_model.numberOfDoctors == 0) {
               _model.showAddMedError();
-              return;
+              // return;
             } else {
               bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
               if (result != null && result) {

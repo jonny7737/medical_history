@@ -13,9 +13,10 @@ class DoctorsViewModel with ChangeNotifier {
 
   final container = ProviderContainer();
   final Logger _l = locator();
-  final String sectionName = 'DoctorsViewModel';
+  String sectionName;
 
   DoctorsViewModel() {
+    sectionName = this.runtimeType.toString();
     _repository.addListener(updateDoctors);
     _l.initSectionPref(sectionName);
     _l.log(sectionName, 'DoctorViewModel instantiated.');

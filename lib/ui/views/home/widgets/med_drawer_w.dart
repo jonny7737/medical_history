@@ -19,7 +19,7 @@ class MedDrawer extends HookWidget {
 
   Function toggleDrawer;
 
-  bool isDebugMode() {
+  bool get isDebugMode {
     bool debugMode = false;
     assert(() {
       debugMode = true;
@@ -124,7 +124,7 @@ class MedDrawer extends HookWidget {
                 context.read(homeViewModel).clearListData(); //_model.clearListData();
               },
             ),
-            if (isDebugMode())
+            if (isDebugMode)
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text(
@@ -185,7 +185,7 @@ class MedDrawer extends HookWidget {
                 );
               },
             ),
-            if (isDebugMode())
+            if (isDebugMode)
               ListTile(
                 leading: Icon(Icons.edit),
                 title: Text(

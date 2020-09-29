@@ -140,13 +140,15 @@ class Router {
           builder: (_) => KeyGenView(),
         );
       default:
-        return MaterialPageRoute(
+        return MaterialPageRoute<bool>(
           builder: (_) => SafeArea(
             child: Scaffold(
+              appBar: AppBar(),
               body: Center(
                 child: Text(
                   'No route defined for ${settings.name}',
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 28, color: Colors.black),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),

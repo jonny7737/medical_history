@@ -99,7 +99,7 @@ class _KeyGenViewState extends State<KeyGenView> {
           ),
         )
       ],
-      style: alertStyle,
+      style: alertStyle(),
       type: AlertType.success,
       context: context,
       title: "SUCCESS!!!",
@@ -108,28 +108,31 @@ class _KeyGenViewState extends State<KeyGenView> {
     );
   }
 
-  var alertStyle = AlertStyle(
-    animationType: AnimationType.fromTop,
-    isCloseButton: false,
-    isOverlayTapDismiss: false,
-    descStyle: TextStyle(fontWeight: FontWeight.bold),
-    animationDuration: Duration(milliseconds: 500),
-    alertBorder: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(15.0),
-      side: BorderSide(
-        color: Colors.grey,
+  AlertStyle alertStyle() {
+    double alertWidth = context.widthPct(1.0);
+    return AlertStyle(
+      animationType: AnimationType.fromTop,
+      isCloseButton: false,
+      isOverlayTapDismiss: false,
+      descStyle: TextStyle(fontWeight: FontWeight.bold),
+      animationDuration: Duration(milliseconds: 500),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+        side: BorderSide(
+          color: Colors.grey,
+        ),
       ),
-    ),
-    titleStyle: TextStyle(
-      color: Colors.yellow, // TODO: need a grey option here for light mode
-      fontWeight: FontWeight.bold,
-    ),
-    constraints: BoxConstraints.expand(width: 350),
-    overlayColor: Color(0x75000000),
-    backgroundColor: Colors.grey,
-    alertElevation: 10,
-    alertAlignment: Alignment.center,
-  );
+      titleStyle: TextStyle(
+        color: Colors.yellow, // TODO: need a grey option here for light mode
+        fontWeight: FontWeight.bold,
+      ),
+      constraints: BoxConstraints.expand(width: alertWidth),
+      overlayColor: Color(0x75000000),
+      backgroundColor: Colors.grey[600],
+      alertElevation: 10,
+      alertAlignment: Alignment.center,
+    );
+  }
 
   Widget fadeAlertAnimation(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
