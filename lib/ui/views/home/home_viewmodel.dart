@@ -12,18 +12,88 @@ class HomeViewModel with ChangeNotifier {
 
   String sectionName;
   UserProvider _user;
+  bool runOnce = false;
 
   HomeViewModel({UserProvider user}) {
+    // _l.log(sectionName, 'Constructor executing', linenumber: _l.lineNumber(StackTrace.current));
+    print('Constructor executing');
     sectionName = this.runtimeType.toString();
     _user = user;
     _l.initSectionPref(sectionName);
     _init();
   }
+
   void _init() async {
     modelDirty(false);
     _doctorRepo.addListener(update);
   }
 
+  //////////////////////////////////////////////////////////////////////
+  void startAnimations() async {
+    await Future.delayed(Duration(milliseconds: 500));
+    logoOpacity = 1.0;
+    await animateLogo();
+    await animateIcon('records', 1, 1);
+    await animateIcon('doctors', 1, -1);
+  }
+
+  //////////////////////////////////////////////////////////////////////
+  double logoOpacity = 1.0;
+  Future animateLogo() async {
+    await Future.delayed(Duration(seconds: 1));
+    logoOpacity = 0.0;
+    notifyListeners();
+    await Future.delayed(Duration(milliseconds: 600));
+  }
+
+  //////////////////////////////////////////////////////////////////////
+  Map<String, double> iconTopStart = {
+    'records': 0.40,
+    'doctors': 0.40,
+    'meds': 0.40,
+    'other': 0.40,
+  };
+  Map<String, double> iconTopEnd = {
+    'records': 0.10,
+    'doctors': 0.10,
+    'meds': 0.70,
+    'other': 0.70,
+  };
+  Map<String, double> iconTop = {'records': 0.40, 'doctors': 0.40, 'meds': 0.40, 'other': 0.40};
+
+  Map<String, double> iconLeftStart = {
+    'records': 0.40,
+    'doctors': 0.40,
+    'meds': 0.40,
+    'other': 0.40,
+  };
+  Map<String, double> iconLeftEnd = {
+    'records': 0.10,
+    'doctors': 0.10,
+    'meds': 0.10,
+    'other': 0.10,
+  };
+  Map<String, double> iconLeft = {'records': 0.40, 'doctors': 0.40, 'meds': 0.50, 'other': 0.50};
+  Map<String, double> iconRight = {'records': 0.40, 'doctors': 0.40, 'meds': 0.50, 'other': 0.50};
+
+  Future animateIcon(String iconName, int topOffset, int leftOffset) async {
+    await Future.delayed(Duration(milliseconds: 400));
+    iconTop[iconName] = iconTopEnd[iconName];
+    if (leftOffset > 0)
+      iconLeft[iconName] = iconLeftEnd[iconName];
+    else
+      iconLeft[iconName] = null;
+
+    if (leftOffset < 0)
+      iconRight[iconName] = iconLeftEnd[iconName];
+    else
+      iconRight[iconName] = null;
+
+    await Future.delayed(Duration(milliseconds: 600));
+    notifyListeners();
+  }
+
+  //////////////////////////////////////////////////////////////////////
   void update() => notifyListeners();
 
   bool isDisposed = false;
