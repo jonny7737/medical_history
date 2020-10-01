@@ -236,7 +236,7 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.14.1"
   flutter_page_transition:
     dependency: "direct main"
     description:
@@ -250,7 +250,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.0"
+    version: "0.11.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -330,7 +330,7 @@ packages:
       name: hooks_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.0"
+    version: "0.11.1"
   html:
     dependency: transitive
     description:

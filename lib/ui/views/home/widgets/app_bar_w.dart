@@ -44,6 +44,14 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
             ),
       actions: <Widget>[
         IconButton(
+          tooltip: "Reanimate Home Screen",
+          icon: Icon(Icons.autorenew, color: Colors.white),
+          padding: EdgeInsets.all(0.0),
+          onPressed: () {
+            _model.reAnimate();
+          },
+        ),
+        IconButton(
           tooltip: "Add a new medication",
           icon: Icon(Icons.add_circle, color: Colors.white),
           padding: EdgeInsets.all(0.0),

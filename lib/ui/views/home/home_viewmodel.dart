@@ -24,73 +24,69 @@ class HomeViewModel with ChangeNotifier {
   }
 
   void _init() async {
+    iconTop = iconTopStart;
+    iconLeft = iconLeftStart;
+    iconRight = iconLeftStart;
     modelDirty(false);
     _doctorRepo.addListener(update);
   }
 
   //////////////////////////////////////////////////////////////////////
-  void startAnimations() async {
-    await Future.delayed(Duration(milliseconds: 500));
+  void reAnimate() {
     logoOpacity = 1.0;
+    iconTop = {'records': 0.30, 'doctors': 0.30, 'meds': 0.30, 'other': 0.30};
+    iconLeft = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
+    iconRight = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
+    isLogoAnimating = true;
+    notifyListeners();
+    Future.delayed(Duration(seconds: 1)).then((value) => startAnimations());
+  }
+
+  //////////////////////////////////////////////////////////////////////
+  void startAnimations() async {
     await animateLogo();
-    await animateIcon('records', 1, 1);
-    await animateIcon('doctors', 1, -1);
+    await animateIcon(iconName: 'doctors', topAlign: true, leftAlign: false);
+    await animateIcon(iconName: 'records', topAlign: true, leftAlign: true);
+    await animateIcon(iconName: 'meds', topAlign: true, leftAlign: false);
   }
 
   //////////////////////////////////////////////////////////////////////
   double logoOpacity = 1.0;
+  bool isLogoAnimating = false;
   Future animateLogo() async {
-    await Future.delayed(Duration(seconds: 1));
+    isLogoAnimating = true;
+    await Future.delayed(Duration(milliseconds: 300));
     logoOpacity = 0.0;
     notifyListeners();
     await Future.delayed(Duration(milliseconds: 600));
+    isLogoAnimating = false;
   }
 
   //////////////////////////////////////////////////////////////////////
-  Map<String, double> iconTopStart = {
-    'records': 0.40,
-    'doctors': 0.40,
-    'meds': 0.40,
-    'other': 0.40,
-  };
-  Map<String, double> iconTopEnd = {
-    'records': 0.10,
-    'doctors': 0.10,
-    'meds': 0.70,
-    'other': 0.70,
-  };
-  Map<String, double> iconTop = {'records': 0.40, 'doctors': 0.40, 'meds': 0.40, 'other': 0.40};
+  final Map iconTopStart = {'records': 0.30, 'doctors': 0.30, 'meds': 0.30, 'other': 0.30};
+  final Map iconTopEnd = {'records': 0.10, 'doctors': 0.10, 'meds': 0.45, 'other': 0.00};
+  Map iconTop;
 
-  Map<String, double> iconLeftStart = {
-    'records': 0.40,
-    'doctors': 0.40,
-    'meds': 0.40,
-    'other': 0.40,
-  };
-  Map<String, double> iconLeftEnd = {
-    'records': 0.10,
-    'doctors': 0.10,
-    'meds': 0.10,
-    'other': 0.10,
-  };
-  Map<String, double> iconLeft = {'records': 0.40, 'doctors': 0.40, 'meds': 0.50, 'other': 0.50};
-  Map<String, double> iconRight = {'records': 0.40, 'doctors': 0.40, 'meds': 0.50, 'other': 0.50};
+  final Map iconLeftStart = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
+  final Map iconLeftEnd = {'records': 0.10, 'doctors': 0.10, 'meds': 0.35, 'other': 0.10};
+  Map iconLeft;
+  Map iconRight;
 
-  Future animateIcon(String iconName, int topOffset, int leftOffset) async {
-    await Future.delayed(Duration(milliseconds: 400));
+  Future animateIcon(
+      {@required String iconName, bool topAlign = true, bool leftAlign = true}) async {
     iconTop[iconName] = iconTopEnd[iconName];
-    if (leftOffset > 0)
+
+    if (leftAlign) {
       iconLeft[iconName] = iconLeftEnd[iconName];
-    else
-      iconLeft[iconName] = null;
-
-    if (leftOffset < 0)
-      iconRight[iconName] = iconLeftEnd[iconName];
-    else
       iconRight[iconName] = null;
+    } else {
+      iconRight[iconName] = iconLeftEnd[iconName];
+      iconLeft[iconName] = null;
+    }
 
-    await Future.delayed(Duration(milliseconds: 600));
+    // print('Left: ${iconLeft[iconName]}  Right: ${iconRight[iconName]}');
     notifyListeners();
+    await Future.delayed(Duration(milliseconds: 300));
   }
 
   //////////////////////////////////////////////////////////////////////

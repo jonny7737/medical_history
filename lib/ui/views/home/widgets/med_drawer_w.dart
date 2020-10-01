@@ -176,6 +176,12 @@ class MedDrawer extends HookWidget {
                       ),
                     ),
                     Text(
+                      'Icons made by Freepik from Flaticon.com\n',
+                      style: TextStyle(
+                        fontSize: context.heightPct(0.020),
+                      ),
+                    ),
+                    Text(
                       'Options drawer made by\n\t\tMarcin Szałek',
                       style: TextStyle(
                         fontSize: context.heightPct(0.020),

@@ -7,13 +7,12 @@ import 'package:sized_context/sized_context.dart';
 class LogoWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    double opacity = useProvider(homeViewModel).logoOpacity;
     return Positioned(
       top: context.heightPct(0.20),
       left: context.widthPct(0.10),
       right: context.widthPct(0.10),
       child: AnimatedOpacity(
-        opacity: opacity,
+        opacity: useProvider(homeViewModel).logoOpacity,
         duration: Duration(milliseconds: 500),
         child: Container(
           height: context.widthPct(0.75),

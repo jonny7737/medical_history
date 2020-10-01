@@ -15,8 +15,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_hooks: ^0.14.0
-  hooks_riverpod: ^0.11.0
+  flutter_hooks: ^0.14.1
+  hooks_riverpod: ^0.11.1
   shared_preferences: ^0.5.12
   get_it: ^5.0.1
   permission_handler: ^5.0.1+1
@@ -47,4 +47,7 @@ flutter:
   assets:
     - assets/meds.png
     - assets/drug.jpg
+    - assets/drug-2.png
     - assets/doctor.png
+    - assets/doctor-1.png
+    - assets/medical-history.png
