@@ -7,7 +7,7 @@ import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/hive_setup.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
-import 'package:medical_history/ui/views/router.dart';
+import 'package:medical_history/ui/views/app_router.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

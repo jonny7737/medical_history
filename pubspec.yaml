@@ -32,6 +32,8 @@ dependencies:
   flutter_secure_storage: ^3.3.4
   encrypt: ^4.0.3
   rflutter_alert: ^1.1.0
+  dropdown_suggestions_form_field: ^1.0.3
+  network_to_file_image: ^2.3.6
 
   cupertino_icons: ^1.0.0
 

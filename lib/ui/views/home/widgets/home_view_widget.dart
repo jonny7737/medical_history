@@ -161,11 +161,15 @@ class MedsActivity extends HookWidget {
         color: Colors.transparent,
         elevation: 20,
         child: InkWell(
-          onTap: () {
+          onTap: () async {
             SystemSound.play(SystemSoundType.click);
             if (_model.numberOfDoctors == 0) {
               _model.showAddMedError();
               return;
+            }
+            bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
+            if (result != null && result) {
+              context.read(homeViewModel).modelDirty(true);
             }
           },
           child: Image(

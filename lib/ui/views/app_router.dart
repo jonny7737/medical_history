@@ -6,13 +6,12 @@ import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/views/login/login_view.dart';
 import 'package:medical_history/ui/views/keygen/keygen_view.dart';
 import 'package:medical_history/ui/views/setup/setup_screen_info.dart';
-// import 'package:medical_history/ui/views/add_med/add_med_view.dart';
-// import 'package:medical_history/ui/views/add_med/meds_loaded_sub_view.dart';
+import 'package:medical_history/ui/views/add_med/add_med_view.dart';
+import 'package:medical_history/ui/views/add_med/widgets/meds_loaded_sub_view.dart';
 import 'package:medical_history/ui/views/doctors/doctors_view.dart';
 import 'package:medical_history/ui/views/doctors/widgets/add_doctor_form.dart';
 import 'package:medical_history/ui/views/home/home_view.dart';
 import 'package:medical_history/ui/views/logger/logger_menu_view.dart';
-// import 'package:medical_history/ui/views/login/login_view.dart';
 import 'package:medical_history/ui/views/splash/splash_view.dart';
 
 class AppRouter {
@@ -102,31 +101,31 @@ class AppRouter {
             );
           },
         );
-      // case addMedRoute:
-      //   AddMedArguments args = settings.arguments;
-      //   int _editIndex;
-      //   if (args != null) _editIndex = args.editIndex;
-      //   return MaterialPageRoute<bool>(
-      //     builder: (_) => AddMedView(_editIndex),
-      //   );
-      // case medsLoadedRoute:
-      //   return PageRouteBuilder<bool>(
-      //     pageBuilder: (_, __, ___) => MedsLoadedSubView(),
-      //     transitionDuration: Duration(milliseconds: 500),
-      //     transitionsBuilder: (
-      //       BuildContext context,
-      //       Animation<double> animation,
-      //       Animation<double> secondaryAnimation,
-      //       Widget child,
-      //     ) {
-      //       return effectMap[PageTransitionType.fadeIn](
-      //         Curves.linear,
-      //         animation,
-      //         secondaryAnimation,
-      //         child,
-      //       );
-      //     },
-      //   );
+      case addMedRoute:
+        AddMedArguments args = settings.arguments;
+        int _editIndex;
+        if (args != null) _editIndex = args.editIndex;
+        return MaterialPageRoute<bool>(
+          builder: (_) => AddMedView(_editIndex),
+        );
+      case medsLoadedRoute:
+        return PageRouteBuilder<bool>(
+          pageBuilder: (_, __, ___) => MedsLoadedSubView(),
+          transitionDuration: Duration(milliseconds: 500),
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
+            return effectMap[PageTransitionType.fadeIn](
+              Curves.linear,
+              animation,
+              secondaryAnimation,
+              child,
+            );
+          },
+        );
       case doctorRoute:
         return MaterialPageRoute<bool>(
           builder: (_) => DoctorsView(),

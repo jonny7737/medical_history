@@ -33,12 +33,14 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
       ),
       title: user.name == null
           ? Text('Not Logged In')
-          : Container(
-              width: context.widthPct(0.30),
-              child: Text(
-                'Welcome ${user.name}',
-                maxLines: 2,
-                textAlign: TextAlign.center,
+          : Center(
+              child: Container(
+                width: context.widthPct(0.65),
+                child: Text(
+                  'Welcome\n${user.name}',
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
       actions: <Widget>[

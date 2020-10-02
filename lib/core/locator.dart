@@ -8,6 +8,7 @@ import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/med_data_box.dart';
 import 'package:medical_history/core/services/med_data_repository.dart';
 import 'package:medical_history/core/services/med_data_service.dart';
+import 'package:medical_history/core/services/med_lookup_service.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/doctors/doctors_viewmodel.dart';
@@ -22,6 +23,8 @@ void setupLocator() {
   locator.registerSingleton<SecureStorage>(SecureStorage());
   locator.registerSingleton<UserModel>(UserModel(), signalsReady: false);
   locator.registerSingleton<ScreenInfoViewModel>(ScreenInfoViewModel());
+
+  locator.registerLazySingleton(() => MedLookUpService());
 
   locator.registerLazySingleton<DoctorsViewModel>(() => DoctorsViewModel());
 

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -14,12 +16,13 @@ import 'package:medical_history/core/services/repository_service.dart';
 import 'package:medical_history/ui/view_model/user_provider.dart';
 
 class MedLookUpService with ChangeNotifier {
-  final UserProvider _user = locator();
+  final container = ProviderContainer();
+  UserProvider _user;
   final Logger _l = locator();
   final String sectionName = 'MedLookUpService';
 
   MedLookUpService() {
-    _l.initSectionPref(sectionName);
+    _user = container.read(userProvider);
   }
 
   bool isBusy = false;
