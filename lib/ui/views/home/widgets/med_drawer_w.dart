@@ -10,14 +10,13 @@ import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 
-// ignore: must_be_immutable
 class MedDrawer extends HookWidget {
   final Logger _l = locator();
   final ScreenInfoViewModel _s = locator();
 
   MedDrawer(this.toggleDrawer);
 
-  Function toggleDrawer;
+  final Function toggleDrawer;
 
   bool get isDebugMode {
     bool debugMode = false;
@@ -176,7 +175,7 @@ class MedDrawer extends HookWidget {
                       ),
                     ),
                     Text(
-                      'Icons made by Freepik from Flaticon.com\n',
+                      'Icons made by Freepik from www.Flaticon.com\n',
                       style: TextStyle(
                         fontSize: context.heightPct(0.020),
                       ),

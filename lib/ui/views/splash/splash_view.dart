@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -26,7 +24,10 @@ class SplashView extends HookWidget {
 
     double _margin;
 
-    runLater(context, sectionName, user.hasPermission, user.shouldLogin);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      if (context == null) return;
+      runLater(context, sectionName, user.hasPermission, user.shouldLogin);
+    });
 
     bool _kbVisible = context.mq.viewInsets.bottom > 10;
     if (_kbVisible && (_s.isSmallScreen || _s.isMediumScreen)) {
@@ -71,8 +72,8 @@ class SplashView extends HookWidget {
 
   void runLater(
       BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
-    await Future.delayed(Duration(seconds: 1));
     if (context == null) return;
+    await Future.delayed(Duration(seconds: 1));
 
     if (!hasPermission) {
       _l.log(sectionName, 'Rebuilding SplashView', always: false);

@@ -31,12 +31,12 @@ class MyApp extends HookWidget {
         linenumber: _l.lineNumber(StackTrace.current), always: false);
 
     return MaterialApp(
-      color: Colors.yellow[100],
+      color: Colors.yellow[200],
       debugShowCheckedModeBanner: false,
       title: 'Medical History',
       theme: useProvider(themeDataProvider).themeData,
       initialRoute: setupRoute,
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 

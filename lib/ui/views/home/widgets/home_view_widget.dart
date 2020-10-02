@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medical_history/core/constants.dart';
 
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/home/widgets/app_bar_w.dart';
 import 'package:medical_history/ui/views/home/widgets/error_msg_w.dart';
@@ -15,9 +16,13 @@ import 'package:medical_history/ui/views/home/riverpods.dart';
 
 class HomeViewWidget extends HookWidget {
   HomeViewWidget({Key key}) : super(key: key);
+  final Logger _l = locator();
 
   @override
   Widget build(BuildContext context) {
+    final String sectionName = this.runtimeType.toString();
+    _l.initSectionPref(sectionName);
+
     if (context.read(homeViewModel).runOnce == false) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         if (context == null) return;
@@ -26,7 +31,7 @@ class HomeViewWidget extends HookWidget {
       context.read(homeViewModel).runOnce = true;
     }
 
-    print('HomeViewWidget rebuilding');
+    _l.log(sectionName, '(Re)building', linenumber: _l.lineNumber(StackTrace.current));
 
     return SafeArea(
       child: Scaffold(
@@ -148,8 +153,6 @@ class MedsActivity extends HookWidget {
     final double iconScale = _s.isLargeScreen ? 0.15 : 0.20;
     final double imageSize = context.heightPct(iconScale);
 
-    // print('[${this.runtimeType.toString()}] Right Offset: ${rightOffset.toStringAsFixed(3)}');
-
     return AnimatedPositioned(
       top: context.heightPct(_model.iconTop[activityName]),
       right: rightOffset,
@@ -160,7 +163,10 @@ class MedsActivity extends HookWidget {
         child: InkWell(
           onTap: () {
             SystemSound.play(SystemSoundType.click);
-            print('$activityName tapped');
+            if (_model.numberOfDoctors == 0) {
+              _model.showAddMedError();
+              return;
+            }
           },
           child: Image(
             height: imageSize,

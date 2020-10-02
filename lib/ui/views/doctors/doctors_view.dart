@@ -92,7 +92,7 @@ class _DoctorListViewState extends State<DoctorListView> {
       itemCount: _model.numberOfDoctors,
       itemBuilder: (context, index) {
         DoctorData doctorData = _model.doctorByIndex(index);
-        getDoctorByName(doctorData.name);
+        // getDoctorByName(doctorData.name);
         return Dismissible(
           key: UniqueKey(),
           dismissThresholds: const {

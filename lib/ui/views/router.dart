@@ -15,7 +15,7 @@ import 'package:medical_history/ui/views/logger/logger_menu_view.dart';
 // import 'package:medical_history/ui/views/login/login_view.dart';
 import 'package:medical_history/ui/views/splash/splash_view.dart';
 
-class Router {
+class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final String sectionName = 'Router';
     LoggerModel _model = locator();
