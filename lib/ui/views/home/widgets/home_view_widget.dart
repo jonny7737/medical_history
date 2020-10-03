@@ -39,7 +39,7 @@ class HomeViewWidget extends HookWidget {
         body: Stack(
           children: <Widget>[
             MedsActivity(),
-            RecordsActivity(),
+            HistoryActivity(),
             DoctorActivity(),
             const ErrorMsgWidget(),
 
@@ -55,8 +55,8 @@ class HomeViewWidget extends HookWidget {
   }
 }
 
-class RecordsActivity extends HookWidget {
-  RecordsActivity({Key key}) : super(key: key);
+class HistoryActivity extends HookWidget {
+  HistoryActivity({Key key}) : super(key: key);
 
   final ScreenInfoViewModel _s = locator();
   final _model = useProvider(homeViewModel);
@@ -83,7 +83,7 @@ class RecordsActivity extends HookWidget {
         child: InkWell(
           onTap: () {
             SystemSound.play(SystemSoundType.click);
-            print('$activityName tapped');
+            Navigator.pushNamed(context, historyRoute);
           },
           child: Image(
             height: imageSize,

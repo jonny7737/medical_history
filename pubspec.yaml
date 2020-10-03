@@ -41,7 +41,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^0.7.2+1
-  build_runner: 1.10.1
+  build_runner: ^1.10.1
 
 flutter:
   uses-material-design: true

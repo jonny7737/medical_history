@@ -3,6 +3,7 @@ import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/models/logger_model.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/ui/views/history/history_view.dart';
 import 'package:medical_history/ui/views/login/login_view.dart';
 import 'package:medical_history/ui/views/keygen/keygen_view.dart';
 import 'package:medical_history/ui/views/setup/setup_screen_info.dart';
@@ -137,6 +138,10 @@ class AppRouter {
       case keygenRoute:
         return MaterialPageRoute<bool>(
           builder: (_) => KeyGenView(),
+        );
+      case historyRoute:
+        return MaterialPageRoute(
+          builder: (_) => HistoryView(),
         );
       default:
         return MaterialPageRoute<bool>(
