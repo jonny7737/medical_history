@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
-import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/ui/views/login/riverpods.dart';
-
-import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/ui/views/login/riverpods.dart';
 import 'package:medical_history/ui/views/login/widgets/login_button_w.dart';
 import 'package:medical_history/ui/views/login/widgets/logo_w.dart';
 import 'package:medical_history/ui/views/login/widgets/user_name_w.dart';
+import 'package:sized_context/sized_context.dart';
 
 class LoginWidget extends HookWidget {
   final Logger _l = locator();

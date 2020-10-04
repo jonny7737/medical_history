@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:medical_history/core/locator.dart';
-import 'package:package_info/package_info.dart';
 import 'package:medical_history/core/services/logger.dart';
+import 'package:package_info/package_info.dart';
 
 class ScreenInfoViewModel {
   final Logger _l = locator();

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/ui/views/login/widgets/login_form_w.dart';
 import 'package:medical_history/ui/views/login/widgets/form_error_w.dart';
+import 'package:medical_history/ui/views/login/widgets/login_form_w.dart';
+import 'package:sized_context/sized_context.dart';
 
 class UserNameWidget extends StatelessWidget {
   UserNameWidget({

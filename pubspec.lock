@@ -190,6 +190,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.5.0"
+  drop_cap_text:
+    dependency: "direct main"
+    description:
+      name: drop_cap_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7"
   dropdown_suggestions_form_field:
     dependency: "direct main"
     description:

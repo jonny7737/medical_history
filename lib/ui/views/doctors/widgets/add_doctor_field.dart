@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medical_history/core/constants.dart';
-import 'package:sized_context/sized_context.dart';
-
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/views/doctors/doctors_viewmodel.dart';
 import 'package:medical_history/ui/views/doctors/widgets/error_msg_w.dart';
+import 'package:sized_context/sized_context.dart';
 
 class AddDoctorField extends StatefulWidget {
   AddDoctorField({Key key, @required int index, String hint, String fieldName})

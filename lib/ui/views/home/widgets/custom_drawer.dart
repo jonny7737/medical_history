@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sized_context/sized_context.dart';
-
 import 'package:medical_history/ui/views/home/widgets/med_drawer_w.dart';
+import 'package:sized_context/sized_context.dart';
 
 class CustomDrawer extends StatefulWidget {
   final Widget child;

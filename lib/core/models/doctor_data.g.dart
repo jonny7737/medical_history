@@ -44,7 +44,5 @@ class DoctorDataAdapter extends TypeAdapter<DoctorData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DoctorDataAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is DoctorDataAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

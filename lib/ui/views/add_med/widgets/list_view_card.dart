@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:medical_history/core/helpers/hero_dialog_route.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/temp_med.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/med_lookup_service.dart';
-import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/widgets/med_image_hero.dart';
 import 'package:network_to_file_image/network_to_file_image.dart';

@@ -9,6 +9,7 @@ const String loggerMenuRoute = 'loggerMenuRoute';
 const String medsLoadedRoute = 'medsLoadedRoute';
 const String keygenRoute = 'keygenRoute';
 const String historyRoute = 'historyRoute';
+const String medsRoute = 'medsRoute';
 
 const String LOGGING_APP = 'MyApp';
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:medical_history/ui/views/logger/logger_menu_w.dart';
 
 class LoggerMenuView extends StatelessWidget {

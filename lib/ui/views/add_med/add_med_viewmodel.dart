@@ -1,13 +1,13 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';
 import 'package:medical_history/core/models/med_data.dart';
 import 'package:medical_history/core/services/doctor_data_service.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/med_data_service.dart';
 import 'package:medical_history/core/services/med_lookup_service.dart';
-import 'package:medical_history/core/locator.dart';
 
 class AddMedViewModel extends ChangeNotifier {
   final Logger _l = locator();

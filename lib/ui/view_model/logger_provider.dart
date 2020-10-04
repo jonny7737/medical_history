@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:medical_history/core/models/logger_model.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/models/logger_model.dart';
 
 class LoggerProvider with ChangeNotifier {
   final LoggerModel _loggerModel = locator();

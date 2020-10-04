@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:medical_history/core/constants.dart';
-import 'package:medical_history/core/models/logger_model.dart';
 import 'package:medical_history/core/locator.dart';
-import 'package:medical_history/ui/views/history/history_view.dart';
-import 'package:medical_history/ui/views/login/login_view.dart';
-import 'package:medical_history/ui/views/keygen/keygen_view.dart';
-import 'package:medical_history/ui/views/setup/setup_screen_info.dart';
+import 'package:medical_history/core/models/logger_model.dart';
 import 'package:medical_history/ui/views/add_med/add_med_view.dart';
 import 'package:medical_history/ui/views/add_med/widgets/meds_loaded_sub_view.dart';
 import 'package:medical_history/ui/views/doctors/doctors_view.dart';
 import 'package:medical_history/ui/views/doctors/widgets/add_doctor_form.dart';
+import 'package:medical_history/ui/views/history/history_view.dart';
 import 'package:medical_history/ui/views/home/home_view.dart';
+import 'package:medical_history/ui/views/keygen/keygen_view.dart';
 import 'package:medical_history/ui/views/logger/logger_menu_view.dart';
+import 'package:medical_history/ui/views/login/login_view.dart';
+import 'package:medical_history/ui/views/meds/meds_view.dart';
+import 'package:medical_history/ui/views/setup/setup_screen_info.dart';
 import 'package:medical_history/ui/views/splash/splash_view.dart';
 
 class AppRouter {
@@ -101,6 +102,10 @@ class AppRouter {
               child,
             );
           },
+        );
+      case medsRoute:
+        return MaterialPageRoute<bool>(
+          builder: (_) => MedsView(),
         );
       case addMedRoute:
         AddMedArguments args = settings.arguments;

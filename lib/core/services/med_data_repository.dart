@@ -2,12 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medical_history/core/global_providers.dart';
-
-import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/med_data.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/med_data_box.dart';
 import 'package:medical_history/core/services/repository.dart';
-import 'package:medical_history/core/locator.dart';
 
 class MedDataRepository with ChangeNotifier implements Repository<MedData> {
   final container = ProviderContainer();

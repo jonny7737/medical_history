@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:medical_history/core/global_providers.dart';
-import 'package:medical_history/core/services/logger.dart';
-// import 'package:medical_history/ui/views/home/riverpods.dart';
-import 'package:sized_context/sized_context.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
-
+import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/views/home/widgets/custom_drawer.dart';
+// import 'package:medical_history/ui/views/home/riverpods.dart';
+import 'package:sized_context/sized_context.dart';
 
 class HomeAppBar extends HookWidget implements PreferredSizeWidget {
   final Logger _l = locator();
@@ -16,7 +15,6 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeProvider = useProvider(themeDataProvider);
     final user = useProvider(userProvider);
-    // final _model = useProvider(homeViewModel);
 
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);

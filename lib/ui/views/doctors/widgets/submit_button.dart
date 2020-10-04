@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:sized_context/sized_context.dart';
-
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/doctors/doctors_viewmodel.dart';
+import 'package:sized_context/sized_context.dart';
 
 class PositionedSubmitButton extends StatelessWidget {
   PositionedSubmitButton({

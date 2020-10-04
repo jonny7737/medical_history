@@ -1,12 +1,11 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:medical_history/core/global_providers.dart';
-
-import 'package:medical_history/core/locator.dart';
-import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/helpers/misc_utils.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';
 import 'package:medical_history/core/services/doctor_data_service.dart';
+import 'package:medical_history/core/services/logger.dart';
 
 class DoctorsViewModel with ChangeNotifier {
   DoctorDataService _repository = locator();

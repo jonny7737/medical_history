@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';
 import 'package:medical_history/core/services/doctor_data_box.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/repository.dart';
-import 'package:medical_history/core/locator.dart';
 
 class DoctorDataRepository with ChangeNotifier implements Repository<DoctorData> {
   final Logger _l = locator();

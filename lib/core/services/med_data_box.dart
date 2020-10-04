@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-
 import 'package:medical_history/core/constants.dart';
-import 'package:medical_history/core/models/med_data.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/models/med_data.dart';
 import 'package:medical_history/core/services/logger.dart';
 
 class MedDataBox with ChangeNotifier {

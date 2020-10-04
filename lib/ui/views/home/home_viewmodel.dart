@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/doctor_data_service.dart';
 import 'package:medical_history/core/services/logger.dart';
@@ -15,11 +16,10 @@ class HomeViewModel with ChangeNotifier {
   bool runOnce = false;
 
   HomeViewModel({UserProvider user}) {
-    // _l.log(sectionName, 'Constructor executing', linenumber: _l.lineNumber(StackTrace.current));
-    print('Constructor executing');
     sectionName = this.runtimeType.toString();
-    _user = user;
     _l.initSectionPref(sectionName);
+    _l.log(sectionName, 'Constructor executing', linenumber: _l.lineNumber(StackTrace.current));
+    _user = user;
     _init();
   }
 
@@ -45,9 +45,9 @@ class HomeViewModel with ChangeNotifier {
   //////////////////////////////////////////////////////////////////////
   void startAnimations() async {
     await animateLogo();
-    await animateIcon(iconName: 'doctors', topAlign: true, leftAlign: false);
-    await animateIcon(iconName: 'records', topAlign: true, leftAlign: true);
-    await animateIcon(iconName: 'meds', topAlign: true, leftAlign: false);
+    await animateIcon(iconName: 'doctors');
+    await animateIcon(iconName: 'records');
+    await animateIcon(iconName: 'meds');
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -68,25 +68,42 @@ class HomeViewModel with ChangeNotifier {
   Map iconTop;
 
   final Map iconLeftStart = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
-  final Map iconLeftEnd = {'records': 0.10, 'doctors': 0.10, 'meds': 0.35, 'other': 0.10};
+  final Map iconLeftEnd = {'records': 0.10, 'doctors': 0.65, 'meds': 0.38, 'other': 0.10};
   Map iconLeft;
   Map iconRight;
 
-  Future animateIcon(
-      {@required String iconName, bool topAlign = true, bool leftAlign = true}) async {
+  Future animateIcon({@required String iconName}) async {
     iconTop[iconName] = iconTopEnd[iconName];
 
-    if (leftAlign) {
-      iconLeft[iconName] = iconLeftEnd[iconName];
-      iconRight[iconName] = null;
-    } else {
-      iconRight[iconName] = iconLeftEnd[iconName];
-      iconLeft[iconName] = null;
-    }
+    iconLeft[iconName] = iconLeftEnd[iconName];
+    iconRight[iconName] = null;
 
-    // print('Left: ${iconLeft[iconName]}  Right: ${iconRight[iconName]}');
     notifyListeners();
     await Future.delayed(Duration(milliseconds: 300));
+  }
+
+  String activityRoute(String activityName) {
+    switch (activityName) {
+      case 'records':
+        return historyRoute;
+      case 'meds':
+        return medsRoute;
+      case 'doctors':
+        return doctorRoute;
+    }
+    return null;
+  }
+
+  String activityIcon(String activityName) {
+    switch (activityName) {
+      case 'records':
+        return "assets/medical-history.png";
+      case 'meds':
+        return "assets/drug-2.png";
+      case 'doctors':
+        return "assets/doctor-1.png";
+    }
+    return null;
   }
 
   //////////////////////////////////////////////////////////////////////

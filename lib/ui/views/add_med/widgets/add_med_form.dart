@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
-import 'package:medical_history/ui/views/add_med/add_med_viewmodel.dart';
-import 'package:medical_history/ui/views/add_med/widgets/error_message_viewmodel.dart';
-import 'package:medical_history/ui/views/add_med/riverpods.dart';
-import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/core/services/logger.dart';
-import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/ui/view_model/screen_info_provider.dart';
+import 'package:medical_history/ui/views/add_med/add_med_viewmodel.dart';
+import 'package:medical_history/ui/views/add_med/riverpods.dart';
 import 'package:medical_history/ui/views/add_med/widgets/add_med_field.dart';
 import 'package:medical_history/ui/views/add_med/widgets/editable_dropdown.dart';
+import 'package:medical_history/ui/views/add_med/widgets/error_message_viewmodel.dart';
 import 'package:medical_history/ui/views/add_med/widgets/submit_button.dart';
 import 'package:medical_history/ui/views/widgets/drop_down_formfield.dart';
 import 'package:medical_history/ui/views/widgets/stack_modal_blur.dart';
+import 'package:sized_context/sized_context.dart';
 
 class AddMedForm extends HookWidget {
   final Logger _l = locator();

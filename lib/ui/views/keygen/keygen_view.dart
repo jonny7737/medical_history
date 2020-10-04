@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medical_history/ui/views/keygen/painter.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
+import 'package:medical_history/ui/views/keygen/painter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sized_context/sized_context.dart';
 

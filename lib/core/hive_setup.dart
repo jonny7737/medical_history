@@ -1,6 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';

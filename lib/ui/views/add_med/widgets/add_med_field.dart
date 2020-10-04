@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sized_context/sized_context.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:medical_history/core/services/logger.dart';
-import 'package:medical_history/ui/views/add_med/riverpods.dart';
 import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/views/add_med/add_med_viewmodel.dart';
+import 'package:medical_history/ui/views/add_med/riverpods.dart';
 import 'package:medical_history/ui/views/add_med/widgets/error_msg_w.dart';
+import 'package:sized_context/sized_context.dart';
 
 class AddMedField extends HookWidget {
   final Logger _l = locator();

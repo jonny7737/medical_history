@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/models/doctor_data.dart';

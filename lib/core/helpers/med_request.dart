@@ -4,10 +4,9 @@ import 'package:html/dom.dart';
 import 'package:html/parser.dart' as HTMLParser;
 import 'package:http/http.dart' as http;
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/models/temp_med.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:xml/xml.dart';
-
-import 'package:medical_history/core/models/temp_med.dart';
 
 ///    class MedRequest
 ///      Utility class to retrieve medication

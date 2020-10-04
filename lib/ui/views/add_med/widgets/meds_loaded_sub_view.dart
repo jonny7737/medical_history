@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/med_lookup_service.dart';
-import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/views/add_med/widgets/list_view_card.dart';
 
 class MedsLoadedSubView extends StatelessWidget {

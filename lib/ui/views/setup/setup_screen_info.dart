@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/constants.dart';
-import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
+import 'package:sized_context/sized_context.dart';
 
 class SetupScreenInfo extends HookWidget {
   final Logger _l = locator();

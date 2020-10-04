@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
-import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/ui/views/home/riverpods.dart';
-import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/constants.dart';
-import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
+import 'package:medical_history/ui/views/home/riverpods.dart';
+import 'package:sized_context/sized_context.dart';
 
 class MedDrawer extends HookWidget {
   final Logger _l = locator();
@@ -20,10 +19,7 @@ class MedDrawer extends HookWidget {
 
   bool get isDebugMode {
     bool debugMode = false;
-    assert(() {
-      debugMode = true;
-      return true;
-    }());
+    assert(debugMode = true);
     return debugMode;
   }
 
@@ -76,41 +72,41 @@ class MedDrawer extends HookWidget {
                 Navigator.pushReplacementNamed(context, loginRoute);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.add_circle),
-              title: Text(
-                'Manage Medications',
-                style: TextStyle(fontSize: fontSize),
-              ),
-              onTap: () async {
-                var numberOfDoctors = context.read(homeViewModel).numberOfDoctors;
-                _l.log(sectionName, 'Number of Doctors available: $numberOfDoctors');
-                if (numberOfDoctors == 0) {
-                  context.read(homeViewModel).showAddMedError(); // _model.showAddMedError();
-                  return;
-                } else {
-                  toggleDrawer();
-                  bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
-                  if (result != null && result) {
-                    context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
-                  }
-                }
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.add_circle),
-              title: Text(
-                'Manage Doctors',
-                style: TextStyle(fontSize: fontSize),
-              ),
-              onTap: () async {
-                toggleDrawer();
-                bool result = await Navigator.pushNamed(context, doctorRoute);
-                if (result != null && result) {
-                  context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
-                }
-              },
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.add_circle),
+            //   title: Text(
+            //     'Manage Medications',
+            //     style: TextStyle(fontSize: fontSize),
+            //   ),
+            //   onTap: () async {
+            //     var numberOfDoctors = context.read(homeViewModel).numberOfDoctors;
+            //     _l.log(sectionName, 'Number of Doctors available: $numberOfDoctors');
+            //     if (numberOfDoctors == 0) {
+            //       context.read(homeViewModel).showAddMedError(); // _model.showAddMedError();
+            //       return;
+            //     } else {
+            //       toggleDrawer();
+            //       bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
+            //       if (result != null && result) {
+            //         context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
+            //       }
+            //     }
+            //   },
+            // ),
+            // ListTile(
+            //   leading: Icon(Icons.add_circle),
+            //   title: Text(
+            //     'Manage Doctors',
+            //     style: TextStyle(fontSize: fontSize),
+            //   ),
+            //   onTap: () async {
+            //     toggleDrawer();
+            //     bool result = await Navigator.pushNamed(context, doctorRoute);
+            //     if (result != null && result) {
+            //       context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
+            //     }
+            //   },
+            // ),
             ListTile(
               leading: Icon(Icons.delete_forever),
               title: Text(
@@ -206,5 +202,12 @@ class MedDrawer extends HookWidget {
         ),
       ),
     );
+  }
+}
+
+class AppAboutListTile extends AboutListTile {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
