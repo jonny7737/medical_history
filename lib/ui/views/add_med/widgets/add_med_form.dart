@@ -85,7 +85,6 @@ class AddMedForm extends HookWidget {
             buildDoctorDropdown(context, _model, sectionName),
             AddMedSubmitButton(formKey: _formKey),
             if (_model.isBusy || _model.medsLoaded) const StackModalBlur(),
-//          if (_model.medsLoaded) ,
           ],
         ),
       ),

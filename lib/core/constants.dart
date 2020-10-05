@@ -16,9 +16,12 @@ const String LOGGING_APP = 'MyApp';
 const String kHiveDirectory = 'hiveboxes';
 const String kMedHiveBox = 'med_data';
 const String kDoctorHiveBox = 'doctor_data';
+const int kMedHiveTypeId = 0;
+const int kDocHiveTypeId = 1;
 
 const double kFieldWidthPercent = 0.80;
 const double kErrorMsgWidthPercent = 0.75;
 
-const int kMedHiveTypeId = 0;
-const int kDocHiveTypeId = 1;
+const String kMedsActivity = 'meds';
+const String kDoctorsActivity = 'doctors';
+const String kRecordsActivity = 'records';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/all.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/ui/views/home/riverpods.dart';
 import 'package:medical_history/ui/views/home/widgets/custom_drawer.dart';
-// import 'package:medical_history/ui/views/home/riverpods.dart';
 import 'package:sized_context/sized_context.dart';
 
 class HomeAppBar extends HookWidget implements PreferredSizeWidget {
@@ -42,14 +42,14 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
               ),
             ),
       actions: <Widget>[
-        // IconButton(
-        //   tooltip: "Reanimate Home Screen",
-        //   icon: Icon(Icons.autorenew, color: Colors.white),
-        //   padding: EdgeInsets.all(0.0),
-        //   onPressed: () {
-        //     _model.reAnimate();
-        //   },
-        // ),
+        IconButton(
+          tooltip: "Reanimate Home Screen",
+          icon: Icon(Icons.autorenew, color: Colors.white),
+          padding: EdgeInsets.all(0.0),
+          onPressed: () {
+            context.read(homeViewModel).reAnimate();
+          },
+        ),
         // // IconButton(
         //   tooltip: "Add a new medication",
         //   icon: Icon(Icons.add_circle, color: Colors.white),

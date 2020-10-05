@@ -8,13 +8,14 @@ import 'package:medical_history/ui/views/home/widgets/activity.dart';
 import 'package:medical_history/ui/views/home/widgets/app_bar_w.dart';
 import 'package:medical_history/ui/views/home/widgets/error_msg_w.dart';
 import 'package:medical_history/ui/views/home/widgets/logo_w.dart';
+import 'package:medical_history/core/constants.dart';
 
 class HomeViewWidget extends HookWidget {
-  HomeViewWidget({Key key}) : super(key: key);
-  final Logger _l = locator();
+  const HomeViewWidget({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Logger _l = locator();
     final String sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
 
@@ -33,9 +34,9 @@ class HomeViewWidget extends HookWidget {
         appBar: HomeAppBar(),
         body: Stack(
           children: <Widget>[
-            const Activity('meds'),
-            const Activity('records'),
-            const Activity('doctors'),
+            const Activity(kMedsActivity),
+            const Activity(kRecordsActivity),
+            const Activity(kDoctorsActivity),
             const ErrorMsgWidget(),
 
             /// Remove the logo from the stack after opacity goes to 0.0.

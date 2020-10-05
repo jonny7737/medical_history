@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/home/riverpods.dart';
@@ -17,12 +18,9 @@ class Activity extends HookWidget {
     final ScreenInfoViewModel _s = locator();
     final _model = useProvider(homeViewModel);
 
-    final double leftOffset = _model.iconLeft[activityName] != null
-        ? context.widthPct(_model.iconLeft[activityName])
-        : null;
+    final double leftOffset = context.widthPct(_model.iconLeft[activityName] ?? 0);
 
-    final double iconScale = _s.isLargeScreen ? 0.15 : 0.20;
-    final double imageSize = context.heightPct(iconScale);
+    final double imageSize = context.heightPct(_s.isLargeScreen ? 0.15 : 0.20);
 
     return AnimatedPositioned(
       top: context.heightPct(_model.iconTop[activityName]),
@@ -36,6 +34,10 @@ class Activity extends HookWidget {
         child: InkWell(
           onTap: () {
             SystemSound.play(SystemSoundType.click);
+            if (activityName == kMedsActivity && _model.numberOfDoctors == 0) {
+              _model.showAddMedError();
+              return;
+            }
             Navigator.pushNamed(context, _model.activityRoute(activityName));
           },
           child: Image(

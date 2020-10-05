@@ -17,7 +17,7 @@ class LoginFormWidget extends StatelessWidget {
     return Form(
       key: _formKey,
       child: TextFormField(
-        autofocus: true,
+        autofocus: false,
         style: TextStyle(color: Colors.black),
         decoration: InputDecoration(
           border: InputBorder.none,

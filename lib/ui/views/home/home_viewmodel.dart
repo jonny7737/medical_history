@@ -15,6 +15,10 @@ class HomeViewModel with ChangeNotifier {
   UserProvider _user;
   bool runOnce = false;
 
+  static const String records = kRecordsActivity;
+  static const String doctors = kDoctorsActivity;
+  static const String meds = kMedsActivity;
+
   HomeViewModel({UserProvider user}) {
     sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
@@ -34,9 +38,9 @@ class HomeViewModel with ChangeNotifier {
   //////////////////////////////////////////////////////////////////////
   void reAnimate() {
     logoOpacity = 1.0;
-    iconTop = {'records': 0.30, 'doctors': 0.30, 'meds': 0.30, 'other': 0.30};
-    iconLeft = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
-    iconRight = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
+    iconTop = {records: 0.30, doctors: 0.30, meds: 0.30, 'other': 0.30};
+    iconLeft = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
+    iconRight = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
     isLogoAnimating = true;
     notifyListeners();
     Future.delayed(Duration(seconds: 1)).then((value) => startAnimations());
@@ -45,9 +49,9 @@ class HomeViewModel with ChangeNotifier {
   //////////////////////////////////////////////////////////////////////
   void startAnimations() async {
     await animateLogo();
-    await animateIcon(iconName: 'doctors');
-    await animateIcon(iconName: 'records');
-    await animateIcon(iconName: 'meds');
+    await animateIcon(iconName: doctors);
+    await animateIcon(iconName: records);
+    await animateIcon(iconName: meds);
   }
 
   //////////////////////////////////////////////////////////////////////
@@ -63,12 +67,12 @@ class HomeViewModel with ChangeNotifier {
   }
 
   //////////////////////////////////////////////////////////////////////
-  final Map iconTopStart = {'records': 0.30, 'doctors': 0.30, 'meds': 0.30, 'other': 0.30};
-  final Map iconTopEnd = {'records': 0.10, 'doctors': 0.10, 'meds': 0.45, 'other': 0.00};
+  final Map iconTopStart = {records: 0.30, doctors: 0.30, meds: 0.30, 'other': 0.30};
+  final Map iconTopEnd = {records: 0.10, doctors: 0.10, meds: 0.45, 'other': 0.00};
   Map iconTop;
 
-  final Map iconLeftStart = {'records': 0.35, 'doctors': 0.35, 'meds': 0.35, 'other': 0.35};
-  final Map iconLeftEnd = {'records': 0.10, 'doctors': 0.65, 'meds': 0.38, 'other': 0.10};
+  final Map iconLeftStart = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
+  final Map iconLeftEnd = {records: 0.08, doctors: 0.65, meds: 0.38, 'other': 0.10};
   Map iconLeft;
   Map iconRight;
 
@@ -84,11 +88,11 @@ class HomeViewModel with ChangeNotifier {
 
   String activityRoute(String activityName) {
     switch (activityName) {
-      case 'records':
+      case kRecordsActivity:
         return historyRoute;
-      case 'meds':
+      case kMedsActivity:
         return medsRoute;
-      case 'doctors':
+      case kDoctorsActivity:
         return doctorRoute;
     }
     return null;
@@ -96,11 +100,11 @@ class HomeViewModel with ChangeNotifier {
 
   String activityIcon(String activityName) {
     switch (activityName) {
-      case 'records':
+      case kRecordsActivity:
         return "assets/medical-history.png";
-      case 'meds':
+      case kMedsActivity:
         return "assets/drug-2.png";
-      case 'doctors':
+      case kDoctorsActivity:
         return "assets/doctor-1.png";
     }
     return null;

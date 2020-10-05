@@ -14,6 +14,6 @@ class HomeView extends HookWidget {
     _l.initSectionPref(sectionName);
     _l.log(sectionName, '(re)building', linenumber: _l.lineNumber(StackTrace.current));
 
-    return CustomDrawer(child: HomeViewWidget());
+    return CustomDrawer(child: const HomeViewWidget());
   }
 }
