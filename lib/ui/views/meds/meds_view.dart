@@ -28,6 +28,7 @@ class MedsView extends HookWidget {
     final String sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
 
+    /// TODO: Need to add encryption to Meds hive box.
     final MedsViewModel _model = useProvider(medsViewModel);
     final themeProvider = useProvider(themeDataProvider);
 

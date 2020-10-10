@@ -1,0 +1,56 @@
+{
+  "categories": [
+    {
+      "id": 0,
+      "name": "patient",
+      "title": "Identify the patient",
+      "type": "string",
+      "items": [
+        {
+          "id": 10,
+          "label": "firstname",
+          "type": "string"
+        },
+        {
+          "id": 11,
+          "label": "lastname",
+          "type": "string"
+        },
+        {
+          "id": 12,
+          "label": "dob",
+          "type": "date"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "allergies",
+      "title": "All known allergies",
+      "type": "string",
+      "items": []
+    },
+    {
+      "id": 2,
+      "name": "conditions",
+      "title": "Past and present conditions",
+      "type": "string",
+      "items": []
+    },
+    {
+      "id": 3,
+      "name": "medications",
+      "title": "All current medications / supplements",
+      "type": "string",
+      "items": []
+    },
+    {
+      "id": 4,
+      "name": "procedures",
+      "title": "Procedures / Surgeries",
+      "type": "string",
+      "items": []
+    }
+  ]
+}
+
