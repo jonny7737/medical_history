@@ -73,15 +73,17 @@ class _KeyGenViewState extends State<KeyGenView> {
               left: context.widthPct(0.10),
               right: context.widthPct(0.10),
               child: Center(
-                  child: Text('Draw any random patter you like.',
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))),
+                  child: Text('Draw a random pattern.',
+                      style: TextStyle(
+                          fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)))),
           Positioned(
               top: context.heightPct(0.10),
               left: context.widthPct(0.10),
               right: context.widthPct(0.10),
               child: Center(
                   child: Text('You do not need to remember it.',
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)))),
+                      style: TextStyle(
+                          fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)))),
         ],
       ),
     );

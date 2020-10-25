@@ -72,41 +72,6 @@ class MedDrawer extends HookWidget {
                 Navigator.pushReplacementNamed(context, loginRoute);
               },
             ),
-            // ListTile(
-            //   leading: Icon(Icons.add_circle),
-            //   title: Text(
-            //     'Manage Medications',
-            //     style: TextStyle(fontSize: fontSize),
-            //   ),
-            //   onTap: () async {
-            //     var numberOfDoctors = context.read(homeViewModel).numberOfDoctors;
-            //     _l.log(sectionName, 'Number of Doctors available: $numberOfDoctors');
-            //     if (numberOfDoctors == 0) {
-            //       context.read(homeViewModel).showAddMedError(); // _model.showAddMedError();
-            //       return;
-            //     } else {
-            //       toggleDrawer();
-            //       bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
-            //       if (result != null && result) {
-            //         context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
-            //       }
-            //     }
-            //   },
-            // ),
-            // ListTile(
-            //   leading: Icon(Icons.add_circle),
-            //   title: Text(
-            //     'Manage Doctors',
-            //     style: TextStyle(fontSize: fontSize),
-            //   ),
-            //   onTap: () async {
-            //     toggleDrawer();
-            //     bool result = await Navigator.pushNamed(context, doctorRoute);
-            //     if (result != null && result) {
-            //       context.read(homeViewModel).modelDirty(true); //_model.modelDirty(true);
-            //     }
-            //   },
-            // ),
             ListTile(
               leading: Icon(Icons.delete_forever),
               title: Text(

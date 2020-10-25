@@ -12,15 +12,6 @@ class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       title: Text('Patient Medical History'),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: () {
-            _l.log(sectionName, 'Patient Medical History',
-                linenumber: _l.lineNumber(StackTrace.current));
-          },
-        )
-      ],
     );
   }
 

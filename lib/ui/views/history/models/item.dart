@@ -2,10 +2,19 @@ class Item {
   final int id;
   final String label;
   final String type;
+  final String hintText;
+  final bool lastItem;
 
-  Item({this.id, this.label, this.type});
+  const Item({this.id, this.label, this.type, this.hintText, this.lastItem});
 
   factory Item.fromJson(Map<String, dynamic> item) {
-    return Item(id: item['id'], label: item['label'], type: item['type']);
+    bool lastItem = false;
+    if (item['lastItem'] != null) lastItem = item['lastItem'];
+    return Item(
+        id: item['id'],
+        label: item['label'],
+        type: item['type'],
+        hintText: item['hintText'],
+        lastItem: lastItem);
   }
 }
