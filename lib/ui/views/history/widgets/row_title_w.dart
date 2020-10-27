@@ -34,7 +34,7 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
       children: [
         Row(
           children: [
-            ShakingIcon(icon: Icons.verified_user, size: 36, secondsToRepeat: 30),
+            ShakingIcon(Icons.verified_user, size: 36, secondsToRepeat: 30),
             SizedBox(width: 10, height: 40),
             Expanded(
               child: Text(
@@ -54,13 +54,8 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
                   child: child,
                 );
               },
-              child: ShakingIcon(
-                icon: Icons.arrow_downward_rounded,
-                size: 36,
-                color: Colors.black,
-                horizontalShake: false,
-                shake: false,
-              ),
+              child: ShakingIcon(Icons.arrow_downward_rounded,
+                  size: 36, color: Colors.black, horizontalShake: false, shake: false),
             )
           ],
         ),

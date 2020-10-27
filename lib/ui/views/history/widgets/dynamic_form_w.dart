@@ -15,26 +15,11 @@ class DynamicForm extends StatefulWidget {
 class _DynamicFormState extends State<DynamicForm> {
   final _formKey = GlobalKey<FormState>();
   List<Widget> _formWidgets = [];
+  bool snackBarAdded = false;
 
   @override
   void initState() {
-    for (var item in widget.items) {
-      switch (item.type) {
-        case 'string':
-          _formWidgets.add(buildTextInput(item));
-          break;
-        case 'checkbox':
-          _formWidgets.add(buildCheckBox(item));
-          break;
-        case 'date':
-          _formWidgets.add(buildDateInput(item));
-          break;
-        default:
-          break;
-      }
-    }
-    _formWidgets.add(snackBarWidget());
-
+    assembleForm();
     super.initState();
   }
 
@@ -48,29 +33,46 @@ class _DynamicFormState extends State<DynamicForm> {
     );
   }
 
-  Widget snackBarWidget() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        onPressed: () {
-          if (_formKey.currentState.validate()) {
-            Scaffold.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  'Processing Data',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            );
-            saveFormData();
-          }
-        },
-        child: Text('Submit'),
-      ),
-    );
+  void saveFormData() {
+    var controller = ExpandableController.of(context);
+
+    _formKey.currentState.save();
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    if (controller.expanded) controller.toggle();
   }
 
-  TextFormField buildTextInput(Item item) {
+  void assembleForm() {
+    _formWidgets.add(SizedBox(height: 10));
+    for (var item in widget.items) {
+      switch (item.type) {
+        case 'string':
+          _formWidgets.add(TextInputWidget(item: item));
+          break;
+        case 'checkbox':
+          _formWidgets.add(CheckBoxWidget(item: item));
+          break;
+        case 'date':
+          _formWidgets.add(DateInputWidget(item: item));
+          break;
+        default:
+          break;
+      }
+    }
+    _formWidgets.add(SizedBox(height: 20));
+    _formWidgets.add(SnackBarWidget(_formKey, saveFormData));
+  }
+}
+
+class DateInputWidget extends StatelessWidget {
+  const DateInputWidget({
+    Key key,
+    @required this.item,
+  }) : super(key: key);
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
     var lastItem = false;
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
@@ -89,11 +91,11 @@ class _DynamicFormState extends State<DynamicForm> {
           FocusScope.of(context).unfocus();
       },
       onSaved: (value) {
-        print('onSaved with VALUE: $value');
+        print('onSaved ${item.id}:${item.label} with VALUE: $value');
       },
       decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.yellow,
+        // fillColor: Colors.yellow,
         isCollapsed: true,
         hintStyle: TextStyle(
           color: Colors.grey,
@@ -104,14 +106,33 @@ class _DynamicFormState extends State<DynamicForm> {
       ),
     );
   }
+}
 
-  Widget buildCheckBox(Item item) {
+class CheckBoxWidget extends StatelessWidget {
+  const CheckBoxWidget({
+    Key key,
+    @required this.item,
+  }) : super(key: key);
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
     return Container();
   }
+}
 
-  Widget buildDateInput(Item item) {
-    var lastItem = false;
-    if (item.lastItem != null && item.lastItem) lastItem = true;
+class TextInputWidget extends StatelessWidget {
+  const TextInputWidget({
+    Key key,
+    @required this.item,
+  }) : super(key: key);
+
+  final Item item;
+
+  @override
+  Widget build(BuildContext context) {
+    var lastItem = item.lastItem != null && item.lastItem;
 
     return TextFormField(
       style: TextStyle(color: Colors.black),
@@ -128,27 +149,50 @@ class _DynamicFormState extends State<DynamicForm> {
           FocusScope.of(context).unfocus();
       },
       onSaved: (value) {
-        print('onSaved with VALUE: $value');
+        print('onSaved ${item.id}:${item.label} with VALUE: $value');
       },
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         filled: true,
-        fillColor: Colors.yellow,
+        // fillColor: Colors.yellow,
         isCollapsed: true,
         hintStyle: TextStyle(
           color: Colors.grey,
           fontWeight: FontWeight.bold,
           fontSize: 14,
         ),
-        hintText: 'What do people call you?',
+        hintText: item.hintText,
       ),
     );
   }
+}
 
-  void saveFormData() {
-    var controller = ExpandableController.of(context);
+class SnackBarWidget extends StatelessWidget {
+  final _formKey;
+  final Function saveData;
 
-    _formKey.currentState.save();
-    SystemChannels.textInput.invokeMethod('TextInput.hide');
-    if (controller.expanded) controller.toggle();
+  SnackBarWidget(this._formKey, this.saveData);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: RaisedButton(
+        color: Theme.of(context).primaryColor,
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            Scaffold.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Processing Data',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            );
+            saveData();
+          }
+        },
+        child: Text('Submit', style: TextStyle(color: Colors.white)),
+      ),
+    );
   }
 }

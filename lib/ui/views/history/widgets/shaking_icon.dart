@@ -38,8 +38,8 @@ class ShakingIcon extends StatefulWidget {
   ///
   /// ```
   ///
-  ShakingIcon({
-    @required this.icon,
+  ShakingIcon(
+    this.icon, {
     @required this.size,
     this.color,
     this.horizontalShake = true,
@@ -60,15 +60,10 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 3),
-    )..addListener(() => setState(() {}));
+    animationController = AnimationController(vsync: this, duration: Duration(seconds: 3))
+      ..addListener(_setState);
 
-    animation = Tween<double>(
-      begin: 50.0,
-      end: 120.0,
-    ).animate(animationController);
+    animation = Tween<double>(begin: 50.0, end: 120.0).animate(animationController);
 
     if (widget.shake) {
       Random rng = Random();
@@ -90,8 +85,13 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
     }
   }
 
+  void _setState() {
+    setState(() {});
+  }
+
   @override
   void dispose() {
+    animationController.removeListener(_setState);
     animationController.dispose();
     timer?.cancel();
     super.dispose();
@@ -99,7 +99,10 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
 
   Vector3 _shake() {
     double progress = animationController.value;
-    double offset = sin(progress * pi * 10.0) * 4;
+
+    /// 10.0 is the number of oscillations (how many wiggles)
+    ///  8.0 is how wide is your wiggle
+    double offset = sin(progress * pi * 10.0) * 8;
     if (widget.horizontalShake) return Vector3(offset, 0.0, 0.0);
     return Vector3(0.0, offset, 0.0);
   }

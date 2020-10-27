@@ -5,7 +5,8 @@
       
       "_1": "items describe the elements of the data input forms",
       "_2": "data input forms are laid out in 'item' order",
-      "_3": "item['lastItem'] is a mechanism for instructing the form generator to switch the keyboard to submit"
+      "_3": "item['lastItem'] is a mechanism for instructing the form generator to switch the keyboard to submit",
+      "_4": "item['value'] is the current saved value for this item"
     },
   "categories": [
     {
@@ -23,12 +24,14 @@
         {
           "id": 11,
           "label": "lastname",
-          "type": "string"
+          "type": "string",
+          "hintText": "Enter your last name"
         },
         {
           "id": 12,
           "label": "dob",
           "type": "date",
+          "hintText": "Enter your date of birth",
           "lastItem": true
         }
       ]

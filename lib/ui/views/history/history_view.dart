@@ -43,7 +43,7 @@ class _HistoryViewState extends State<HistoryView> {
             builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot) {
               if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: EdgeInsets.all(10),
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: snapshot.data.map((category) => _ListTileWidget(category)).toList(),
@@ -55,13 +55,8 @@ class _HistoryViewState extends State<HistoryView> {
   }
 
   Future<List<Category>> loadCategories() async {
-    _l.log(sectionName, '(Re)Loading Categories', linenumber: _l.lineNumber(StackTrace.current));
     String jsonString = await rootBundle.loadString('assets/categories.json');
-
-    _l.log(sectionName, '$jsonString', linenumber: _l.lineNumber(StackTrace.current));
-
     final parsedJson = json.decode(jsonString);
-
     List<Category> categories = CategoriesList.fromJson(parsedJson['categories']).categories;
     return categories;
   }
@@ -84,7 +79,7 @@ class _ListTileWidget extends StatelessWidget {
       child: ExpandableNotifier(
         child: ScrollOnExpand(
           child: ExpandablePanel(
-            header: RowTitleWidget(category.title),
+            header: RowTitleWidget(category.title + " : " + category.id.toString()),
             expanded: InputForm(category.items),
           ),
         ),
