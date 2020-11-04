@@ -15,7 +15,6 @@ class DynamicForm extends StatefulWidget {
 class _DynamicFormState extends State<DynamicForm> {
   final _formKey = GlobalKey<FormState>();
   List<Widget> _formWidgets = [];
-  bool snackBarAdded = false;
 
   @override
   void initState() {
@@ -59,7 +58,7 @@ class _DynamicFormState extends State<DynamicForm> {
       }
     }
     _formWidgets.add(SizedBox(height: 20));
-    _formWidgets.add(SnackBarWidget(_formKey, saveFormData));
+    _formWidgets.add(SubmitButton(_formKey, saveFormData));
   }
 }
 
@@ -166,11 +165,11 @@ class TextInputWidget extends StatelessWidget {
   }
 }
 
-class SnackBarWidget extends StatelessWidget {
+class SubmitButton extends StatelessWidget {
   final _formKey;
   final Function saveData;
 
-  SnackBarWidget(this._formKey, this.saveData);
+  SubmitButton(this._formKey, this.saveData);
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +182,7 @@ class SnackBarWidget extends StatelessWidget {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text(
-                  'Processing Data',
+                  'Data saved',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

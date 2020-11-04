@@ -110,7 +110,7 @@ class MedsView extends HookWidget {
                         return true;
                       },
                       onDismissed: (DismissDirection direction) {
-                        return handleDismiss(_model, direction, index);
+                        return handleDismiss(context, _model, direction, index);
                       },
                       child: Container(
                         width: context.widthPx,
@@ -144,9 +144,8 @@ class MedsView extends HookWidget {
     }
   }
 
-  handleDismiss(MedsViewModel model, DismissDirection direction, int index) {
+  handleDismiss(BuildContext context, MedsViewModel model, DismissDirection direction, int index) {
     // Get a reference to the swiped item
-    //model.setActiveMedIndex(index);
     final swipedMed = model.getMedAt(index);
 
     // Remove it from the list
@@ -174,7 +173,6 @@ class MedsView extends HookWidget {
                   // Deep copy the deleted medication
                   final newMed = swipedMed.copyWith();
                   // Save the newly created medication
-//                  log('${newMed.mfg}', linenumber: lineNumber(StackTrace.current));
                   if (newMed.mfg.contains('Unknown')) await model.setDefaultMedImage(newMed.rxcui);
                   model.save(newMed);
                 }),

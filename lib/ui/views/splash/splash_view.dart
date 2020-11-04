@@ -72,8 +72,8 @@ class SplashView extends HookWidget {
 
   void runLater(
       BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
-    if (context == null) return;
     await Future.delayed(Duration(seconds: 1));
+    if (context == null) return;
 
     if (!hasPermission) {
       _l.log(sectionName, 'Rebuilding SplashView', always: false);
@@ -94,6 +94,7 @@ class SplashView extends HookWidget {
       Navigator.pushReplacementNamed(context, loginRoute);
     } else {
       _l.log(sectionName, 'Executing Home Route', always: false);
+      if (context == null) return;
       Navigator.pushReplacementNamed(context, homeRoute);
     }
   }

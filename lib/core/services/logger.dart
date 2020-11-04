@@ -37,7 +37,7 @@ class Logger {
   ///
   /// Example:
   /// ```dart
-  ///     log(sectionName, 'Message to log', linenumber: lineNumber(StackTrace.current);
+  ///     log(sectionName, 'Message to log', linenumber: lineNumber(StackTrace.current), always: false);
   ///
   /// ```
   ///

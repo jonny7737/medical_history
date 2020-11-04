@@ -16,6 +16,41 @@ class _KeyGenViewState extends State<KeyGenView> {
   CustomPaint canvas;
   Painter fingerPainter;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Draw a random pattern")),
+      backgroundColor: Colors.yellow[600],
+      body: Stack(
+        children: [
+          container(),
+          const PositionedText1(),
+          const PositionedText2(),
+        ],
+      ),
+    );
+  }
+
+  Container container() {
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints.expand(),
+        child: new Card(
+          elevation: 10.0,
+          child: CustomPaint(
+            painter: fingerPainter,
+            child: GestureDetector(
+              onPanStart: panStart,
+              onPanUpdate: panUpdate,
+              onPanEnd: panEnd,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   void panStart(DragStartDetails details) {
     fingerPainter.startStroke(details.localPosition);
   }
@@ -36,57 +71,6 @@ class _KeyGenViewState extends State<KeyGenView> {
   void initState() {
     super.initState();
     fingerPainter = Painter(Colors.black);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    touch = new GestureDetector(
-      onPanStart: panStart,
-      onPanUpdate: panUpdate,
-      onPanEnd: panEnd,
-    );
-
-    canvas = new CustomPaint(
-      painter: fingerPainter,
-      child: touch,
-    );
-
-    Container container = Container(
-      padding: EdgeInsets.all(20.0),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints.expand(),
-        child: new Card(
-          elevation: 10.0,
-          child: canvas,
-        ),
-      ),
-    );
-
-    return new Scaffold(
-      appBar: AppBar(title: Text("Draw a random pattern")),
-      backgroundColor: Colors.yellow[600],
-      body: Stack(
-        children: [
-          container,
-          Positioned(
-              top: context.heightPct(0.05),
-              left: context.widthPct(0.10),
-              right: context.widthPct(0.10),
-              child: Center(
-                  child: Text('Draw a random pattern.',
-                      style: TextStyle(
-                          fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)))),
-          Positioned(
-              top: context.heightPct(0.10),
-              left: context.widthPct(0.10),
-              right: context.widthPct(0.10),
-              child: Center(
-                  child: Text('You do not need to remember it.',
-                      style: TextStyle(
-                          fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold)))),
-        ],
-      ),
-    );
   }
 
   Alert alertUser() {
@@ -142,6 +126,44 @@ class _KeyGenViewState extends State<KeyGenView> {
       child: FadeTransition(
         opacity: animation,
         child: child,
+      ),
+    );
+  }
+}
+
+class PositionedText2 extends StatelessWidget {
+  const PositionedText2({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: context.heightPct(0.10),
+      left: context.widthPct(0.10),
+      right: context.widthPct(0.10),
+      child: Center(
+        child: Text(
+          'You do not need to remember it.',
+          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class PositionedText1 extends StatelessWidget {
+  const PositionedText1({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: context.heightPct(0.05),
+      left: context.widthPct(0.10),
+      right: context.widthPct(0.10),
+      child: Center(
+        child: Text(
+          'Draw a random pattern.',
+          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

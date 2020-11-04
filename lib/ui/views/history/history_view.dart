@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:async' show Future;
-import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -9,8 +8,7 @@ import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/views/history/models/category.dart';
 import 'package:medical_history/ui/views/history/models/category_list.dart';
-import 'package:medical_history/ui/views/history/widgets/input_form_w.dart';
-import 'package:medical_history/ui/views/history/widgets/row_title_w.dart';
+import 'package:medical_history/ui/views/history/widgets/expandable_list_tile.dart';
 
 class HistoryView extends StatefulWidget {
   @override
@@ -22,15 +20,6 @@ class _HistoryViewState extends State<HistoryView> {
   String sectionName;
 
   Future<List<Category>> _categories;
-
-  @override
-  void initState() {
-    sectionName = this.runtimeType.toString();
-    _l.initSectionPref(sectionName);
-
-    _categories = loadCategories();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +35,7 @@ class _HistoryViewState extends State<HistoryView> {
                 padding: EdgeInsets.all(10),
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
-                  children: snapshot.data.map((category) => _ListTileWidget(category)).toList(),
+                  children: snapshot.data.map((category) => ExpandableListTile(category)).toList(),
                 ),
               );
             }),
@@ -54,36 +43,19 @@ class _HistoryViewState extends State<HistoryView> {
     );
   }
 
+  @override
+  void initState() {
+    sectionName = this.runtimeType.toString();
+    _l.initSectionPref(sectionName);
+
+    _categories = loadCategories();
+    super.initState();
+  }
+
   Future<List<Category>> loadCategories() async {
     String jsonString = await rootBundle.loadString('assets/categories.json');
     final parsedJson = json.decode(jsonString);
     List<Category> categories = CategoriesList.fromJson(parsedJson['categories']).categories;
     return categories;
-  }
-}
-
-class _ListTileWidget extends StatelessWidget {
-  const _ListTileWidget(this.category, {Key key}) : super(key: key);
-
-  final Category category;
-
-  @override
-  Widget build(BuildContext context) {
-    return ExpandableTheme(
-      data: ExpandableThemeData(
-        scrollAnimationDuration: Duration(milliseconds: 400),
-        animationDuration: Duration(milliseconds: 400),
-        tapBodyToCollapse: true,
-        hasIcon: false,
-      ),
-      child: ExpandableNotifier(
-        child: ScrollOnExpand(
-          child: ExpandablePanel(
-            header: RowTitleWidget(category.title + " : " + category.id.toString()),
-            expanded: InputForm(category.items),
-          ),
-        ),
-      ),
-    );
   }
 }

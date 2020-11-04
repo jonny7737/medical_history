@@ -26,8 +26,8 @@ class MyApp extends HookWidget {
     if (!initializationComplete())
       return Material(color: Colors.yellow[300], child: CircularProgressIndicator());
 
-    _l.log(sectionName, '(re)building',
-        linenumber: _l.lineNumber(StackTrace.current), always: false);
+    _l.log(sectionName, '(Re)building application...',
+        linenumber: _l.lineNumber(StackTrace.current));
 
     return MaterialApp(
       color: Colors.yellow[200],

@@ -28,7 +28,6 @@ void setupLocator() {
 
   locator.registerLazySingleton<DoctorsViewModel>(() => DoctorsViewModel());
 
-  // locator.registerLazySingleton<RepositoryService>(() => DataService());
   locator.registerLazySingleton<DoctorDataService>(() => DoctorDataService());
   locator.registerLazySingleton<MedDataService>(() => MedDataService());
   locator.registerLazySingleton<MedDataRepository>(() => MedDataRepository());

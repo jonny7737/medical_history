@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
-import 'package:medical_history/ui/views/history/widgets/shaking_icon.dart';
+import 'package:medical_history/ui/views/widgets/shaking_icon.dart';
 
 class RowTitleWidget extends StatefulWidget {
   final String title;
@@ -27,9 +27,9 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
     if (ExpandableController.of(context).expanded) {
       angle = -pi;
       _controller.forward();
-    } else {
+    } else
       _controller.reverse();
-    }
+
     return Column(
       children: [
         Row(
