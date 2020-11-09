@@ -54,7 +54,7 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
                   child: child,
                 );
               },
-              child: ShakingIcon(Icons.arrow_downward_rounded,
+              child: ShakingIcon('assets/003-pointer.png',
                   size: 36, color: Colors.black, horizontalShake: false, shake: false),
             )
           ],

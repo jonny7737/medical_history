@@ -7,7 +7,7 @@ import 'package:vector_math/vector_math_64.dart';
 
 class ShakingIcon extends StatefulWidget {
   /// Icon to shake
-  final IconData icon;
+  final dynamic icon;
 
   /// Size parameter passed to Icon constructor
   final double size;
@@ -19,8 +19,11 @@ class ShakingIcon extends StatefulWidget {
   /// Default to true
   final bool shake;
 
-  /// Horizontal or Vertical shake.  Default to Horizontal shake
+  /// Horizontal shake.  Default to Horizontal shake
   final bool horizontalShake;
+
+  /// Vertical shake.  Default to Horizontal shake
+  final bool verticalShake;
 
   /// Frequency to repeat the shake in seconds
   final int secondsToRepeat;
@@ -29,7 +32,11 @@ class ShakingIcon extends StatefulWidget {
   ///
   ///     1. [icon]: IconData (Icons.) for icon to shake.
   ///
-  ///     2. [horizontalShake]: Shake horizontally if true, otherwise shake vertically.
+  ///     2. [horizontalShake]: Shake horizontally if true.
+  ///
+  ///     3. [verticalShake]: Shake vertically if true.
+  ///
+  ///     Diagonal shack if horizontal and vertical are both true.
   ///
   ///
   /// Example:
@@ -44,6 +51,7 @@ class ShakingIcon extends StatefulWidget {
     this.color,
     this.shake = true,
     this.horizontalShake = true,
+    this.verticalShake = false,
     this.secondsToRepeat = 0,
   });
 
@@ -55,9 +63,24 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
   AnimationController animationController;
   Timer timer;
   final Random rng = Random();
+  dynamic child;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.icon.runtimeType == IconData)
+      child = Icon(
+        widget.icon,
+        size: widget.size,
+        color: widget.color,
+      );
+    else if (widget.icon.runtimeType == String) {
+      child = ImageIcon(
+        AssetImage(widget.icon),
+        size: widget.size,
+        color: widget.color,
+      );
+    }
+
     return AnimatedBuilder(
       animation: animationController,
       builder: (_, child) {
@@ -66,11 +89,7 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
           child: child,
         );
       },
-      child: Icon(
-        widget.icon,
-        size: widget.size,
-        color: widget.color,
-      ),
+      child: child,
     );
   }
 
@@ -89,7 +108,6 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
       waitForIt();
       if (widget.secondsToRepeat > 0)
         timer = Timer.periodic(Duration(seconds: widget.secondsToRepeat), (_) {
-          if (ExpandableController.of(context).expanded) return;
           waitForIt();
         });
     }
@@ -98,6 +116,7 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
   void waitForIt() {
     Future.delayed(Duration(seconds: nextRndInt(min: 2, max: 7))).then((_) {
       if (!mounted) return;
+      if (ExpandableController.of(context).expanded) return;
       animationController.reset();
       animationController.forward();
     });
@@ -114,7 +133,8 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
     /// 10.0 is the number of oscillations (how many wiggles)
     ///  8.0 is how wide is your wiggle
     double offset = sin(animationController.value * pi * 10.0) * 8;
-    if (widget.horizontalShake) return Vector3(offset, offset, 0.0);
-    return Vector3(0.0, offset, 0.0);
+    double xOffset = widget.horizontalShake ? offset : 0.0;
+    double yOffset = widget.verticalShake ? offset : 0.0;
+    return Vector3(xOffset, yOffset, 0.0);
   }
 }

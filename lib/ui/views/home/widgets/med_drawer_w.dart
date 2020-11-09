@@ -30,8 +30,12 @@ class MedDrawer extends HookWidget {
 
     double fontSize = context.heightPct(_s.isLargeScreen ? 0.023 : 0.028) * _s.fontScale;
 
+    // var themeData = useProvider(themeDataProvider).themeData;
+    // debugPrint(themeData.buttonTheme.toString());
+
     return SafeArea(
       child: Material(
+        // textStyle: TextStyle(color: Colors.white),
         child: Column(
           children: <Widget>[
             Container(
@@ -42,7 +46,7 @@ class MedDrawer extends HookWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: useProvider(themeDataProvider).appMargin,
               ),
-              color: Theme.of(context).primaryColor,
+              // color: Theme.of(context).primaryColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -103,52 +107,7 @@ class MedDrawer extends HookWidget {
                 style: TextStyle(fontSize: fontSize),
               ),
               onTap: () {
-                /**
-                 * TODO: Convert showAboutDialog to a custom widget
-                    so that all elements can be configured.
-                 **/
-                showAboutDialog(
-                  context: context,
-                  applicationIcon: Image.asset(
-                    'assets/meds.png',
-                    height: context.heightPct(0.15),
-                  ),
-                  applicationName: 'Medical History',
-                  applicationVersion: '${_s.version}+${_s.buildNumber}',
-                  children: [
-                    Text(
-                      'All drug information is provided by U.S. National Institute of Health API.'
-                      '  Not appropriate for use with non-U.S. drugs.\n',
-                      style: TextStyle(
-                        fontSize: context.heightPct(0.020),
-                      ),
-                    ),
-                    Text(
-                      'Icon made by Dark Web from www.flaticon.com\n',
-                      style: TextStyle(
-                        fontSize: context.heightPct(0.020),
-                      ),
-                    ),
-                    Text(
-                      'Icon made by ultimatearm from www.flaticon.com\n',
-                      style: TextStyle(
-                        fontSize: context.heightPct(0.020),
-                      ),
-                    ),
-                    Text(
-                      'Icons made by Freepik from www.Flaticon.com\n',
-                      style: TextStyle(
-                        fontSize: context.heightPct(0.020),
-                      ),
-                    ),
-                    Text(
-                      'Options drawer made by\n\t\tMarcin Szałek',
-                      style: TextStyle(
-                        fontSize: context.heightPct(0.020),
-                      ),
-                    )
-                  ],
-                );
+                showAboutInfo(context);
               },
             ),
             if (isDebugMode)
@@ -166,6 +125,51 @@ class MedDrawer extends HookWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void showAboutInfo(BuildContext context) {
+    showAboutDialog(
+      context: context,
+      applicationIcon: Image.asset(
+        'assets/meds.png',
+        height: context.heightPct(0.15),
+      ),
+      applicationName: 'Medical History',
+      applicationVersion: '${_s.version}+${_s.buildNumber}',
+      children: [
+        Text(
+          'All drug information is provided by U.S. National Institute of Health API.'
+          '  Not appropriate for use with non-U.S. drugs.\n',
+          style: TextStyle(
+            fontSize: context.heightPct(0.020),
+          ),
+        ),
+        Text(
+          'Icon designed by Dark Web from www.flaticon.com\n',
+          style: TextStyle(
+            fontSize: context.heightPct(0.020),
+          ),
+        ),
+        Text(
+          'Icon designed by ultimatearm from www.flaticon.com\n',
+          style: TextStyle(
+            fontSize: context.heightPct(0.020),
+          ),
+        ),
+        Text(
+          'Icons designed by Freepik from www.Flaticon.com\n',
+          style: TextStyle(
+            fontSize: context.heightPct(0.020),
+          ),
+        ),
+        Text(
+          'Options drawer designed by\n\t\tMarcin Szałek',
+          style: TextStyle(
+            fontSize: context.heightPct(0.020),
+          ),
+        )
+      ],
     );
   }
 }

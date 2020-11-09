@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
 import 'package:medical_history/ui/views/keygen/painter.dart';
+import 'package:medical_history/ui/views/keygen/widgets/positioned_text.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sized_context/sized_context.dart';
 
@@ -29,6 +30,12 @@ class _KeyGenViewState extends State<KeyGenView> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fingerPainter = Painter(Colors.black);
   }
 
   Container container() {
@@ -65,12 +72,6 @@ class _KeyGenViewState extends State<KeyGenView> {
 
   void panEnd(DragEndDetails details) {
     fingerPainter.endStroke();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fingerPainter = Painter(Colors.black);
   }
 
   Alert alertUser() {
@@ -126,44 +127,6 @@ class _KeyGenViewState extends State<KeyGenView> {
       child: FadeTransition(
         opacity: animation,
         child: child,
-      ),
-    );
-  }
-}
-
-class PositionedText2 extends StatelessWidget {
-  const PositionedText2({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: context.heightPct(0.10),
-      left: context.widthPct(0.10),
-      right: context.widthPct(0.10),
-      child: Center(
-        child: Text(
-          'You do not need to remember it.',
-          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-}
-
-class PositionedText1 extends StatelessWidget {
-  const PositionedText1({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: context.heightPct(0.05),
-      left: context.widthPct(0.10),
-      right: context.widthPct(0.10),
-      child: Center(
-        child: Text(
-          'Draw a random pattern.',
-          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
       ),
     );
   }

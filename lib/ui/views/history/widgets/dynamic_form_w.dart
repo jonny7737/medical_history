@@ -76,7 +76,7 @@ class DateInputWidget extends StatelessWidget {
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return TextFormField(
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
       onEditingComplete: () {
         print('onEditingComplete');
@@ -134,7 +134,7 @@ class TextInputWidget extends StatelessWidget {
     var lastItem = item.lastItem != null && item.lastItem;
 
     return TextFormField(
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
       onEditingComplete: () {
         print('onEditingComplete');

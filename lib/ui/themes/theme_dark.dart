@@ -19,7 +19,7 @@ final ThemeData myThemeDark = ThemeData(
   primaryColorLight: Color(0xff9e9e9e),
   primaryColorDark: Color(0xff000000),
   accentColor: Color(0xff64ffda),
-  accentColorBrightness: Brightness.light,
+  accentColorBrightness: Brightness.dark,
   canvasColor: Color(0xff303030),
   scaffoldBackgroundColor: Colors.yellow[700],
   bottomAppBarColor: Color(0xff424242),
@@ -74,6 +74,12 @@ final ThemeData myThemeDark = ThemeData(
       onBackground: Color(0xffffffff),
       onError: Color(0xff000000),
       brightness: Brightness.dark,
+    ),
+  ),
+  textButtonTheme: TextButtonThemeData(
+    style: TextButton.styleFrom(
+      primary: Colors.white,
+      textStyle: TextStyle(fontWeight: FontWeight.bold),
     ),
   ),
   textTheme: TextTheme(
