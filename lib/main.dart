@@ -21,13 +21,12 @@ class MyApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final String sectionName = this.runtimeType.toString();
+    _l.log(sectionName, '(Re)building application...',
+        linenumber: _l.lineNumber(StackTrace.current), always: true);
 
     /// Ensure these Providers have completed setup before proceeding
     if (!initializationComplete())
       return Material(color: Colors.yellow[300], child: CircularProgressIndicator());
-
-    _l.log(sectionName, '(Re)building application...',
-        linenumber: _l.lineNumber(StackTrace.current));
 
     return MaterialApp(
       color: Colors.yellow[200],

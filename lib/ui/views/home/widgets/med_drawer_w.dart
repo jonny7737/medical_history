@@ -30,9 +30,6 @@ class MedDrawer extends HookWidget {
 
     double fontSize = context.heightPct(_s.isLargeScreen ? 0.023 : 0.028) * _s.fontScale;
 
-    // var themeData = useProvider(themeDataProvider).themeData;
-    // debugPrint(themeData.buttonTheme.toString());
-
     return SafeArea(
       child: Material(
         // textStyle: TextStyle(color: Colors.white),
@@ -57,20 +54,14 @@ class MedDrawer extends HookWidget {
                   ),
                   Text(
                     'Options',
-                    style: TextStyle(
-                      fontSize: context.heightPct(0.03),
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(fontSize: context.heightPct(0.03), color: Colors.white),
                   ),
                 ],
               ),
             ),
             ListTile(
               leading: Icon(Icons.account_circle),
-              title: Text(
-                'Logout',
-                style: TextStyle(fontSize: fontSize),
-              ),
+              title: Text('Logout', style: TextStyle(fontSize: fontSize)),
               onTap: () {
                 context.read(userProvider).logout();
                 Navigator.pushReplacementNamed(context, loginRoute);
@@ -78,10 +69,7 @@ class MedDrawer extends HookWidget {
             ),
             ListTile(
               leading: Icon(Icons.delete_forever),
-              title: Text(
-                'Clear ALL Data',
-                style: TextStyle(fontSize: fontSize),
-              ),
+              title: Text('Clear ALL Data', style: TextStyle(fontSize: fontSize)),
               onTap: () {
                 _l.log(sectionName, 'Clear all data',
                     linenumber: _l.lineNumber(StackTrace.current));
@@ -91,10 +79,7 @@ class MedDrawer extends HookWidget {
             if (isDebugMode)
               ListTile(
                 leading: Icon(Icons.settings),
-                title: Text(
-                  'Log Options',
-                  style: TextStyle(fontSize: fontSize),
-                ),
+                title: Text('Log Options', style: TextStyle(fontSize: fontSize)),
                 onTap: () {
                   toggleDrawer();
                   Navigator.pushNamed(context, loggerMenuRoute);
@@ -102,10 +87,7 @@ class MedDrawer extends HookWidget {
               ),
             ListTile(
               leading: Icon(Icons.info),
-              title: Text(
-                'About',
-                style: TextStyle(fontSize: fontSize),
-              ),
+              title: Text('About', style: TextStyle(fontSize: fontSize)),
               onTap: () {
                 showAboutInfo(context);
               },
@@ -113,10 +95,7 @@ class MedDrawer extends HookWidget {
             if (isDebugMode)
               ListTile(
                 leading: Icon(Icons.edit),
-                title: Text(
-                  'Painter Testing',
-                  style: TextStyle(fontSize: fontSize),
-                ),
+                title: Text('Painter Testing', style: TextStyle(fontSize: fontSize)),
                 onTap: () {
                   toggleDrawer();
                   Navigator.pushNamed(context, keygenRoute);
@@ -141,33 +120,23 @@ class MedDrawer extends HookWidget {
         Text(
           'All drug information is provided by U.S. National Institute of Health API.'
           '  Not appropriate for use with non-U.S. drugs.\n',
-          style: TextStyle(
-            fontSize: context.heightPct(0.020),
-          ),
+          style: TextStyle(fontSize: context.heightPct(0.020)),
         ),
         Text(
           'Icon designed by Dark Web from www.flaticon.com\n',
-          style: TextStyle(
-            fontSize: context.heightPct(0.020),
-          ),
+          style: TextStyle(fontSize: context.heightPct(0.020)),
         ),
         Text(
           'Icon designed by ultimatearm from www.flaticon.com\n',
-          style: TextStyle(
-            fontSize: context.heightPct(0.020),
-          ),
+          style: TextStyle(fontSize: context.heightPct(0.020)),
         ),
         Text(
           'Icons designed by Freepik from www.Flaticon.com\n',
-          style: TextStyle(
-            fontSize: context.heightPct(0.020),
-          ),
+          style: TextStyle(fontSize: context.heightPct(0.020)),
         ),
         Text(
           'Options drawer designed by\n\t\tMarcin Szałek',
-          style: TextStyle(
-            fontSize: context.heightPct(0.020),
-          ),
+          style: TextStyle(fontSize: context.heightPct(0.020)),
         )
       ],
     );

@@ -13,8 +13,8 @@ class ExpandableListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpandableTheme(
       data: ExpandableThemeData(
-        scrollAnimationDuration: Duration(milliseconds: 600),
-        animationDuration: Duration(milliseconds: 500),
+        scrollAnimationDuration: Duration(milliseconds: 500),
+        animationDuration: Duration(milliseconds: 400),
         tapBodyToCollapse: true,
         hasIcon: false,
       ),

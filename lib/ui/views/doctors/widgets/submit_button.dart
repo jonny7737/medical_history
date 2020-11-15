@@ -7,10 +7,8 @@ import 'package:medical_history/ui/views/doctors/doctors_viewmodel.dart';
 import 'package:sized_context/sized_context.dart';
 
 class PositionedSubmitButton extends StatelessWidget {
-  PositionedSubmitButton({
-    Key key,
-    @required GlobalKey<FormState> formKey,
-  })  : _formKey = formKey,
+  PositionedSubmitButton({Key key, @required GlobalKey<FormState> formKey})
+      : _formKey = formKey,
         super(key: key);
 
   final GlobalKey<FormState> _formKey;
@@ -30,12 +28,12 @@ class PositionedSubmitButton extends StatelessWidget {
       child: RaisedButton(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        onPressed: () async {
+        onPressed: () {
           _l.log(sectionName, 'pressed');
           SystemChannels.textInput.invokeMethod('TextInput.hide');
 
           /// Check form for errors by calling the field onSave function
-          /// I didn't use the validate function because I want custom error UX
+          /// I didn't use the validate function because I want custom error UXs
           _formKey.currentState.save();
 
           // If form has no errors AND form has a new med has been set

@@ -27,9 +27,11 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
     if (ExpandableController.of(context).expanded) {
       angle = -pi;
       _controller.forward();
-    } else
-      _controller.reverse();
-
+    } else {
+      Future.delayed(Duration(milliseconds: 600)).then(
+        (_) => _controller.reverse(),
+      );
+    }
     return Column(
       children: [
         Row(

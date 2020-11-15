@@ -10,7 +10,7 @@
     },
   "categories": [
     {
-      "id": 0,
+      "id": 1,
       "name": "patient",
       "title": "Patient identity",
       "type": "string",
@@ -37,28 +37,28 @@
       ]
     },
     {
-      "id": 1,
+      "id": 2,
       "name": "allergies",
       "title": "All known allergies",
       "type": "string",
       "items": []
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "conditions",
       "title": "Past and present conditions",
       "type": "string",
       "items": []
     },
     {
-      "id": 3,
+      "id": 4,
       "name": "medications",
       "title": "All current medications / supplements",
       "type": "string",
       "items": []
     },
     {
-      "id": 4,
+      "id": 5,
       "name": "procedures",
       "title": "Procedures / Surgeries",
       "type": "string",

@@ -12,7 +12,7 @@ import 'package:medical_history/ui/views/add_med/widgets/add_med_form.dart';
 class AddMedArguments {
   final int editIndex;
 
-  AddMedArguments({this.editIndex});
+  const AddMedArguments({this.editIndex});
 }
 
 class AddMedView extends HookWidget {

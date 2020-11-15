@@ -24,8 +24,9 @@ class SplashView extends HookWidget {
 
     double _margin;
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (context == null) return;
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+      if (context == null || _s.splashDown) return;
+      _s.splashDown = true;
       runLater(context, sectionName, user.hasPermission, user.shouldLogin);
     });
 
@@ -72,15 +73,12 @@ class SplashView extends HookWidget {
 
   void runLater(
       BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
-    await Future.delayed(Duration(seconds: 1));
-    if (context == null) return;
+    await Future.delayed(Duration(seconds: 2));
 
     if (!hasPermission) {
       _l.log(sectionName, 'Rebuilding SplashView', always: false);
       (context as Element).markNeedsBuild();
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        (context as Element).rebuild();
-      });
+      (context as Element).rebuild();
       return;
     }
     if (!await _ss.doctorBoxKeySet) {
@@ -93,8 +91,7 @@ class SplashView extends HookWidget {
       _l.log(sectionName, 'Executing Login Route', always: false);
       Navigator.pushReplacementNamed(context, loginRoute);
     } else {
-      _l.log(sectionName, 'Executing Home Route', always: false);
-      if (context == null) return;
+      _l.log(sectionName, 'Executing Home Route', linenumber: _l.lineNumber(StackTrace.current));
       Navigator.pushReplacementNamed(context, homeRoute);
     }
   }

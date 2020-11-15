@@ -18,8 +18,9 @@ class Category {
   }
 
   static List<Item> parseItems(parsedJson) {
+    int categoryID = parsedJson['id'];
     var list = parsedJson['items'] as List;
-    List<Item> itemList = list.map((data) => Item.fromJson(data)).toList();
+    List<Item> itemList = list.map((data) => Item.fromJson(data, categoryID)).toList();
     return itemList;
   }
 

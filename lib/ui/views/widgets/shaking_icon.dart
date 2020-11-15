@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 class ShakingIcon extends StatefulWidget {
-  /// Icon to shake
+  /// Icon to shake - This can be either an IconData object
+  /// or a String assetName for an AssetImage.
   final dynamic icon;
 
   /// Size parameter passed to Icon constructor
@@ -114,7 +115,8 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
   }
 
   void waitForIt() {
-    Future.delayed(Duration(seconds: nextRndInt(min: 2, max: 7))).then((_) {
+    /// Random delay between 0.5 and 5 seconds.
+    Future.delayed(Duration(milliseconds: nextRndInt(min: 1, max: 10) * 500)).then((_) {
       if (!mounted) return;
       if (ExpandableController.of(context).expanded) return;
       animationController.reset();

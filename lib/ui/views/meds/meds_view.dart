@@ -37,6 +37,15 @@ class MedsView extends HookWidget {
 
     _model.setBottoms(context);
 
+    // if (_model.numberOfMeds == 0)
+    //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //     _model.setActiveMedIndex(null);
+    //     bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
+    //     if (result != null && result) {
+    //       _model.modelDirty(true);
+    //     }
+    //   });
+    //
     return SafeArea(
       child: Material(
         elevation: 10,

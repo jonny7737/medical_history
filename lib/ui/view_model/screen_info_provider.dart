@@ -13,6 +13,9 @@ class ScreenInfoViewModel {
   String buildNumber;
   String sectionName;
 
+  /// Guard against re-triggering navigation from SplashView.
+  bool splashDown = false;
+
   ScreenInfoViewModel() {
     init();
     _l.log(sectionName, 'isSetupCompleted: ${_setupCompleted.toString()}',

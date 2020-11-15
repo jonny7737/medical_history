@@ -16,23 +16,22 @@ class InputForm extends StatelessWidget {
     if (!ExpandableController.of(context).expanded)
       SystemChannels.textInput.invokeMethod('TextInput.hide');
 
-    return Material(
-      color: Colors.transparent,
-      elevation: 20,
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.yellow[200],
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 15),
-          margin: EdgeInsets.only(bottom: 30),
-          height: context.heightPct(0.70),
-          width: context.widthPct(0.90),
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.yellow[200],
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
 
-          /// Build form here
-          child: items.isNotEmpty ? Center(child: DynamicForm(items)) : SizedBox(),
+          /// TODO: BoxShadow has square corners which do not match the borderRadius.
+          boxShadow: [BoxShadow(blurRadius: 10, color: Colors.grey, offset: Offset(5, 10))],
         ),
+        padding: EdgeInsets.symmetric(horizontal: 15),
+        margin: EdgeInsets.only(bottom: 30),
+        height: context.heightPct(0.70),
+        width: context.widthPct(0.90),
+
+        /// Build form here
+        child: items.isNotEmpty ? Center(child: DynamicForm(items)) : SizedBox(),
       ),
     );
   }
