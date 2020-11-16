@@ -133,21 +133,13 @@ class AppRouter {
           },
         );
       case doctorRoute:
-        return MaterialPageRoute<bool>(
-          builder: (_) => DoctorsView(),
-        );
+        return MaterialPageRoute<bool>(builder: (_) => DoctorsView());
       case addDoctorRoute:
-        return MaterialPageRoute<bool>(
-          builder: (_) => AddDoctorForm(),
-        );
+        return MaterialPageRoute<bool>(builder: (_) => AddDoctorForm());
       case keygenRoute:
-        return MaterialPageRoute<bool>(
-          builder: (_) => KeyGenView(),
-        );
+        return MaterialPageRoute<bool>(builder: (_) => KeyGenView());
       case historyRoute:
-        return MaterialPageRoute(
-          builder: (_) => HistoryView(),
-        );
+        return MaterialPageRoute(builder: (_) => HistoryView());
       default:
         return MaterialPageRoute<bool>(
           builder: (_) => SafeArea(

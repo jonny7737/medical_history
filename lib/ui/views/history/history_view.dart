@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/cupertino.dart';
+// import 'package:dart_json/dart_json.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/material.dart';
@@ -53,9 +54,88 @@ class _HistoryViewState extends State<HistoryView> {
   }
 
   Future<List<Category>> loadCategories() async {
+    // CategoriesList categoriesList = Json.deserialize(strJson);
+
     String jsonString = await rootBundle.loadString('assets/categories.json');
     final parsedJson = json.decode(jsonString);
     List<Category> categories = CategoriesList.fromJson(parsedJson['categories']).categories;
+
     return categories;
   }
+  // import 'package:dart_json/dart_json.dart';
+
+  // void main() {
+  //   CategoriesList categoriesList = Json.deserialize(json);
+  //   print(categoriesList.categories.toString());
+  //
+  //   String newJson = Json.serialize(categoriesList);
+  //   // print(newJson);
+  //   categoriesList = Json.deserialize(newJson);
+  //   print(categoriesList.categories.toString());
+  // }
+//   String strJson = '''{
+//       "__documentation__":
+//   {
+//     "_0": "ALWAYS verify the json format after editing this file",
+//
+//     "_1": "items describe the elements of the data input forms",
+//     "_2": "data input forms are laid out in 'item' order",
+//     "_3": "item['lastItem'] is a mechanism for instructing the form generator to switch the keyboard to submit",
+//     "_4": "item['value'] is the current saved value for this item"
+//   },
+//   "categories": [
+//     {
+//       "id": 1,
+//       "name": "patient",
+//       "title": "Patient identity",
+//       "items": [
+//         {
+//           "id": 10,
+//           "label": "firstname",
+//           "type": "string",
+//           "hintText": "Enter your first name"
+//         },
+//         {
+//           "id": 11,
+//           "label": "lastname",
+//           "type": "string",
+//           "hintText": "Enter your last name"
+//         },
+//         {
+//           "id": 12,
+//           "label": "dob",
+//           "type": "date",
+//           "hintText": "Enter your date of birth",
+//           "lastItem": true
+//         }
+//       ]
+//     },
+//     {
+//       "id": 2,
+//       "name": "allergies",
+//       "title": "All known allergies",
+//       "items": []
+//     },
+//     {
+//       "id": 3,
+//       "name": "conditions",
+//       "title": "Past and present conditions",
+//       "items": []
+//     },
+//     {
+//       "id": 4,
+//       "name": "medications",
+//       "title": "All current medications / supplements",
+//       "items": []
+//     },
+//     {
+//       "id": 5,
+//       "name": "procedures",
+//       "title": "Procedures / Surgeries",
+//       "items": []
+//     }
+//   ]
+// }
+// ''';
+
 }
