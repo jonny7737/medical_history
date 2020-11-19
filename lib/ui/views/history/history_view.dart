@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:async' show Future;
 import 'package:flutter/cupertino.dart';
-// import 'package:dart_json/dart_json.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class HistoryView extends StatefulWidget {
 }
 
 class _HistoryViewState extends State<HistoryView> {
+  final String kHistoryFormContent = 'lib/ui/views/history/form_content/categories.json';
   final Logger _l = locator();
   String sectionName;
 
@@ -54,25 +54,25 @@ class _HistoryViewState extends State<HistoryView> {
   }
 
   Future<List<Category>> loadCategories() async {
-    // CategoriesList categoriesList = Json.deserialize(strJson);
-
-    String jsonString = await rootBundle.loadString('assets/categories.json');
+    String jsonString = await rootBundle.loadString(kHistoryFormContent);
     final parsedJson = json.decode(jsonString);
-    List<Category> categories = CategoriesList.fromJson(parsedJson['categories']).categories;
 
-    return categories;
+    print(jsonEncode(CategoriesList.fromJson(parsedJson)));
+
+    return CategoriesList.fromJson(parsedJson).categories;
   }
-  // import 'package:dart_json/dart_json.dart';
 
-  // void main() {
-  //   CategoriesList categoriesList = Json.deserialize(json);
-  //   print(categoriesList.categories.toString());
-  //
-  //   String newJson = Json.serialize(categoriesList);
-  //   // print(newJson);
-  //   categoriesList = Json.deserialize(newJson);
-  //   print(categoriesList.categories.toString());
-  // }
+// import 'package:dart_json/dart_json.dart';
+
+// void main() {
+//   CategoriesList categoriesList = Json.deserialize(json);
+//   print(categoriesList.categories.toString());
+//
+//   String newJson = Json.serialize(categoriesList);
+//   // print(newJson);
+//   categoriesList = Json.deserialize(newJson);
+//   print(categoriesList.categories.toString());
+// }
 //   String strJson = '''{
 //       "__documentation__":
 //   {
@@ -137,5 +137,4 @@ class _HistoryViewState extends State<HistoryView> {
 //   ]
 // }
 // ''';
-
 }

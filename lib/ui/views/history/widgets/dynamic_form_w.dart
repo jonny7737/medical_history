@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +41,11 @@ class _DynamicFormState extends State<DynamicForm> {
     _formKey.currentState.save();
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     if (controller.expanded) controller.toggle();
+
+    // print(widget.items[0].toJson());
+    widget.items.forEach((element) {
+      print(jsonEncode(element.toJson()));
+    });
   }
 
   void assembleForm() {

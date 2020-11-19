@@ -18,12 +18,14 @@
         {
           "id": 10,
           "label": "firstname",
+          "value": "Ted",
           "type": "string",
           "hintText": "Enter your first name"
         },
         {
           "id": 11,
           "label": "lastname",
+          "value": "Jones",
           "type": "string",
           "hintText": "Enter your last name"
         },

@@ -1,5 +1,7 @@
 import 'package:medical_history/ui/views/history/models/category.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+@JsonSerializable()
 class CategoriesList {
   final List<Category> categories;
 
@@ -7,10 +9,13 @@ class CategoriesList {
     this.categories,
   });
 
-  factory CategoriesList.fromJson(List<dynamic> parsedJson) {
-    List<Category> categories = List<Category>();
-    categories = parsedJson.map((i) => Category.fromJson(i)).toList();
+  CategoriesList.fromJson(Map<String, dynamic> json) : categories = parseCategories(json);
 
-    return CategoriesList(categories: categories);
+  Map<String, dynamic> toJson() => {'categories': categories};
+
+  static List<Category> parseCategories(parsedJson) {
+    var list = parsedJson['categories'] as List;
+    List<Category> categories = list.map((data) => Category.fromJson(data)).toList();
+    return categories;
   }
 }

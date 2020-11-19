@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
 
 class DateInputWidget extends StatelessWidget {
-  const DateInputWidget({Key key, @required this.item}) : super(key: key);
+  DateInputWidget({Key key, @required this.item}) : super(key: key);
 
   final Item item;
 
@@ -15,6 +15,7 @@ class DateInputWidget extends StatelessWidget {
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return TextFormField(
+      initialValue: item.value,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
       onEditingComplete: () {
@@ -29,7 +30,8 @@ class DateInputWidget extends StatelessWidget {
           FocusScope.of(context).unfocus();
       },
       onSaved: (value) {
-        print('onSaved ${item.id}:${item.label} with VALUE: $value');
+        // print('onSaved ${item.id}:${item.label} with VALUE: [$value] is !MT [${value.isEmpty}]');
+        item.setValue(value);
       },
       decoration: InputDecoration(
         filled: true,
@@ -62,6 +64,7 @@ class TextInputWidget extends StatelessWidget {
     var lastItem = item.lastItem != null && item.lastItem;
 
     return TextFormField(
+      initialValue: item.value,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
       onEditingComplete: () {
@@ -76,7 +79,8 @@ class TextInputWidget extends StatelessWidget {
           FocusScope.of(context).nextFocus();
       },
       onSaved: (value) {
-        print('onSaved ${item.id}:${item.label} with VALUE: $value');
+        // print('onSaved ${item.id}:${item.label} with VALUE: $value');
+        item.setValue(value);
       },
       decoration: InputDecoration(
         filled: true,

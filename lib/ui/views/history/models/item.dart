@@ -1,23 +1,40 @@
+import 'package:json_annotation/json_annotation.dart';
+
+@JsonSerializable()
 class Item {
+  @JsonKey(toJson: null, includeIfNull: true)
   final int categoryID;
   final int id;
   final String label;
   final String type;
   final String hintText;
   final bool lastItem;
+  String value;
 
-  const Item({this.id, this.categoryID, this.label, this.type, this.hintText, this.lastItem});
+  Item({this.id, this.categoryID, this.label, this.type, this.value, this.hintText, this.lastItem});
 
-  factory Item.fromJson(Map<String, dynamic> item, int categoryID) {
-    bool lastItem = item['lastItem'] ?? false;
-    return Item(
-        id: item['id'],
-        categoryID: categoryID,
-        label: item['label'],
-        type: item['type'],
-        hintText: item['hintText'],
-        lastItem: lastItem);
+  void setValue(val) {
+    // print(val);
+    value = val;
   }
 
-  Map<String, dynamic> toJson() => {'id': id, 'category': categoryID, 'label': label};
+  Item.fromJson(Map<String, dynamic> json, int categoryID)
+      : categoryID = categoryID,
+        id = json['id'],
+        label = json['label'],
+        type = json['type'],
+        value = json['value'],
+        hintText = json['hintText'],
+        lastItem = json['lastItem'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'label': label,
+      'type': type,
+      if (value != null && value.isNotEmpty) 'value': value.toString(),
+      'hintText': hintText,
+      if (lastItem != null) 'lastItem': lastItem,
+    };
+  }
 }
