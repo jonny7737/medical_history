@@ -96,18 +96,14 @@ class SubmitButton extends StatelessWidget {
   final Function saveData;
 
   const SubmitButton(this._formKey, this.saveData);
+
   @override
   Widget build(BuildContext context) {
     // ElevatedButton eb = ElevatedButton(onPressed: null, child: null);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
-        child: Text(
-          'Submit',
-          style: TextStyle(fontSize: 18),
-
-          /// Customize elevatedButtonTheme
-        ),
+        child: Text('Submit', style: TextStyle(fontSize: 18)), // Customize elevatedButtonTheme
         onPressed: () {
           if (_formKey.currentState.validate()) {
             Scaffold.of(context).showSnackBar(

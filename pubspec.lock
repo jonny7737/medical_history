@@ -77,7 +77,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.4"
+    version: "1.10.6"
   build_runner_core:
     dependency: transitive
     description:
@@ -257,7 +257,14 @@ packages:
       name: flutter_hooks
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.1"
+    version: "0.15.0"
+  flutter_multi_formatter:
+    dependency: "direct main"
+    description:
+      name: flutter_multi_formatter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.3"
   flutter_page_transition:
     dependency: "direct main"
     description:
@@ -841,5 +848,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.10.0 <2.11.0"
-  flutter: ">=1.20.0 <2.0.0"
+  dart: ">=2.10.2 <2.11.0"
+  flutter: ">=1.22.3 <2.0.0"

@@ -1,37 +1,26 @@
 import 'dart:math';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:medical_history/ui/views/widgets/shaking_icon.dart';
 
-class RowTitleWidget extends StatefulWidget {
+class RowTitleWidget extends HookWidget {
   final String title;
+  final double angle = -pi;
 
   RowTitleWidget(this.title, {Key key}) : super(key: key);
 
   @override
-  _RowTitleWidgetState createState() => _RowTitleWidgetState();
-}
-
-class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  double angle = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (ExpandableController.of(context).expanded) {
-      angle = -pi;
-      _controller.forward();
-    } else {
-      Future.delayed(Duration(milliseconds: 600)).then(
-        (_) => _controller.reverse(),
-      );
-    }
+    final _controller = useAnimationController(duration: Duration(milliseconds: 400));
+
+    Future.delayed(Duration(milliseconds: 600)).then((_) {
+      if (ExpandableController.of(context).expanded) {
+        _controller.forward();
+      } else if (_controller.status == AnimationStatus.completed) {
+        _controller.reverse();
+      }
+    });
     return Column(
       children: [
         Row(
@@ -40,7 +29,7 @@ class _RowTitleWidgetState extends State<RowTitleWidget> with SingleTickerProvid
             SizedBox(width: 10, height: 40),
             Expanded(
               child: Text(
-                widget.title,
+                title,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
