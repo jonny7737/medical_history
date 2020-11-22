@@ -13,12 +13,16 @@ class ShakingIcon extends StatefulWidget {
   /// Size parameter passed to Icon constructor
   final double size;
 
+  /// Function to determine shake flag from outside this class
+  /// This function takes precedence over shake flag
+  final Function shakeIt;
+
+  /// Enable / Disable shake flag to support dynamic UI
+  /// Default is true
+  final bool shake;
+
   /// Color parameter passed to Icon constructor
   final Color color;
-
-  /// Enable / Disable shake to support dynamic UI
-  /// Default to true
-  final bool shake;
 
   /// Horizontal shake.  Default to Horizontal shake
   final bool horizontalShake;
@@ -48,12 +52,13 @@ class ShakingIcon extends StatefulWidget {
   ///
   ShakingIcon(
     this.icon, {
-    @required this.size,
+    this.size = 36,
+    this.shakeIt,
     this.color,
     this.shake = true,
     this.horizontalShake = true,
     this.verticalShake = false,
-    this.secondsToRepeat = 0,
+    this.secondsToRepeat,
   });
 
   @override
@@ -104,12 +109,17 @@ class _ShakingIconState extends State<ShakingIcon> with SingleTickerProviderStat
 
   int nextRndInt({int min = 0, @required int max}) => min + rng.nextInt(max - min);
 
+  bool shakeIt() {
+    if (widget.shakeIt != null) return widget.shakeIt(widget.shake);
+    return widget.shake;
+  }
+
   void likeAPolaroidCamera() {
-    if (widget.shake) {
+    if (shakeIt()) {
       waitForIt();
-      if (widget.secondsToRepeat > 0)
+      if (widget.secondsToRepeat != null)
         timer = Timer.periodic(Duration(seconds: widget.secondsToRepeat), (_) {
-          waitForIt();
+          if (shakeIt()) waitForIt();
         });
     }
   }

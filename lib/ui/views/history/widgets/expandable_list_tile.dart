@@ -21,7 +21,7 @@ class ExpandableListTile extends StatelessWidget {
       child: ExpandableNotifier(
         child: ScrollOnExpand(
           child: ExpandablePanel(
-            header: RowTitleWidget(category.title + " : " + category.id.toString()),
+            header: RowTitleWidget(category.title, category.id),
             expanded: InputForm(category.items),
           ),
         ),

@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
+import 'package:medical_history/ui/views/history/services/category_services.dart';
 import 'package:medical_history/ui/views/history/widgets/form_widgets.dart';
 
 class DynamicForm extends StatefulWidget {
@@ -16,8 +16,9 @@ class DynamicForm extends StatefulWidget {
 }
 
 class _DynamicFormState extends State<DynamicForm> {
+  final CategoryServices _cs = locator();
   final _formKey = GlobalKey<FormState>();
-  List<Widget> _formWidgets = [];
+  final List<Widget> _formWidgets = [];
 
   @override
   void initState() {
@@ -42,10 +43,8 @@ class _DynamicFormState extends State<DynamicForm> {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     if (controller.expanded) controller.toggle();
 
-    // print(widget.items[0].toJson());
-    widget.items.forEach((element) {
-      print(jsonEncode(element.toJson()));
-    });
+    _cs.saveCategories();
+    setState(() {});
   }
 
   void assembleForm() {

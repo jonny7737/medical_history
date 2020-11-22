@@ -4,6 +4,7 @@
       "_0": "ALWAYS verify the json format after editing this file",
       
       "_1": "items describe the elements of the data input forms",
+      "_1a": "items list is required, even if empty '[]'",
       "_2": "data input forms are laid out in 'item' order",
       "_3": "item['lastItem'] is a mechanism for instructing the form generator to switch the keyboard to submit",
       "_4": "item['value'] is the current saved value for this item"
@@ -18,14 +19,12 @@
         {
           "id": 10,
           "label": "firstname",
-          "value": "Ted",
           "type": "string",
           "hintText": "Enter your first name"
         },
         {
           "id": 11,
           "label": "lastname",
-          "value": "Jones",
           "type": "string",
           "hintText": "Enter your last name"
         },

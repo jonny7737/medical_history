@@ -12,6 +12,7 @@ import 'package:medical_history/core/services/med_lookup_service.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/doctors/doctors_viewmodel.dart';
+import 'package:medical_history/ui/views/history/services/category_services.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -35,4 +36,6 @@ void setupLocator() {
 
   locator.registerLazySingleton<MedDataBox>(() => MedDataBox());
   locator.registerLazySingleton<DoctorDataBox>(() => DoctorDataBox());
+
+  locator.registerLazySingleton<CategoryServices>(() => CategoryServices());
 }

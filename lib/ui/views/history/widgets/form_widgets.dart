@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
 
+///************************************************************************
 class DateInputWidget extends StatelessWidget {
   DateInputWidget({Key key, @required this.item}) : super(key: key);
 
@@ -43,6 +44,7 @@ class DateInputWidget extends StatelessWidget {
   }
 }
 
+///************************************************************************
 class CheckBoxWidget extends StatelessWidget {
   const CheckBoxWidget({Key key, @required this.item}) : super(key: key);
 
@@ -54,6 +56,7 @@ class CheckBoxWidget extends StatelessWidget {
   }
 }
 
+///************************************************************************
 class TextInputWidget extends StatelessWidget {
   const TextInputWidget({Key key, @required this.item}) : super(key: key);
 
@@ -91,6 +94,7 @@ class TextInputWidget extends StatelessWidget {
   }
 }
 
+///************************************************************************
 class SubmitButton extends StatelessWidget {
   final _formKey;
   final Function saveData;
