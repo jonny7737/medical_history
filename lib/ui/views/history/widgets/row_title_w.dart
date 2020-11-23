@@ -23,8 +23,13 @@ class RowTitleWidget extends HookWidget {
     /// Shake parameter is the value of the shake parameter passed to the ShakingIcon widget.
     /// It is included for flexibility.
     bool shakeIt(bool shake) {
+      /// Shake based on shake flag originally set for ShakingIcon
       bool shakeIt = shake;
+
+      /// Override with with rules from CategoryServices if id is set
       if (id != null) shakeIt = _cs.shakeIt(id);
+
+      /// Ignore everything and set to no shaking if ExpandablePanel is expanded
       if (ExpandableController.of(context).expanded) shakeIt = false;
       return shakeIt;
     }

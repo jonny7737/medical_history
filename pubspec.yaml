@@ -42,7 +42,7 @@ dependencies:
   shaking_icon:
     path: '../shaking_icon'
 
-  cupertino_icons: ^1.0.0
+  cupertino_icons: 1.0.0
 
 dev_dependencies:
   flutter_test:
