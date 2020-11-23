@@ -38,7 +38,9 @@ dependencies:
   drop_cap_text: ^1.0.7
   expandable: ^4.1.4
   json_serializable: ^3.5.0
-  flutter_multi_formatter: ^1.2.3
+  flutter_multi_formatter: ^1.3.0
+  shaking_icon:
+    path: '../shaking_icon'
 
   cupertino_icons: ^1.0.0
 

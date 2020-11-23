@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/views/history/services/category_services.dart';
-import 'package:medical_history/ui/views/widgets/shaking_icon.dart';
+import 'package:shaking_icon/shaking_icon.dart';
 
 class RowTitleWidget extends HookWidget {
   final CategoryServices _cs = locator();
@@ -18,6 +18,16 @@ class RowTitleWidget extends HookWidget {
   Widget build(BuildContext context) {
     final _controller = useAnimationController(duration: Duration(milliseconds: 400));
     final isMounted = useIsMounted();
+
+    /// Function passed to ShakingIcon to determine shake flag dynamically.
+    /// Shake parameter is the value of the shake parameter passed to the ShakingIcon widget.
+    /// It is included for flexibility.
+    bool shakeIt(bool shake) {
+      bool shakeIt = shake;
+      if (id != null) shakeIt = _cs.shakeIt(id);
+      if (ExpandableController.of(context).expanded) shakeIt = false;
+      return shakeIt;
+    }
 
     Future.delayed(Duration(milliseconds: 600)).then((_) {
       if (!isMounted()) return;
@@ -59,14 +69,5 @@ class RowTitleWidget extends HookWidget {
         Divider(height: 15, thickness: 2, color: Colors.grey),
       ],
     );
-  }
-
-  /// Function passed to ShakingIcon to determine shake flag dynamically
-  bool shakeIt(bool shake) {
-    bool shakeIt = shake;
-    if (id != null) {
-      shakeIt = _cs.shakeIt(id);
-    }
-    return shakeIt;
   }
 }
