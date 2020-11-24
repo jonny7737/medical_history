@@ -33,7 +33,6 @@ class CategoryServices {
     bool notShakeIt = false;
     c?.items?.forEach((Item item) {
       if (item?.value != null) notShakeIt = notShakeIt || item.value.length > 0;
-      // print('_cs[$id]: $notShakeIt');
     });
     return !notShakeIt;
   }
