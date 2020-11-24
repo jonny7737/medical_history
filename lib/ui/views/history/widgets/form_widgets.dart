@@ -14,7 +14,6 @@ class DateInputWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tec = useTextEditingController();
     List<MaskTextInputFormatter> maskTextInputFormatterList = [
       MaskTextInputFormatter(mask: "##/##/####", filter: {"#": RegExp(r'[0-9]')})
     ];
@@ -23,7 +22,7 @@ class DateInputWidget extends HookWidget {
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return TextFormField(
-      controller: tec,
+      controller: useTextEditingController(),
       inputFormatters: maskTextInputFormatterList,
       initialValue: item.value,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
