@@ -2,20 +2,29 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
 
 ///************************************************************************
-class DateInputWidget extends StatelessWidget {
+class DateInputWidget extends HookWidget {
   DateInputWidget({Key key, @required this.item}) : super(key: key);
 
   final Item item;
 
   @override
   Widget build(BuildContext context) {
+    var tec = useTextEditingController();
+    List<MaskTextInputFormatter> maskTextInputFormatterList = [
+      MaskTextInputFormatter(mask: "##/##/####", filter: {"#": RegExp(r'[0-9]')})
+    ];
+
     var lastItem = false;
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return TextFormField(
+      controller: tec,
+      inputFormatters: maskTextInputFormatterList,
       initialValue: item.value,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
