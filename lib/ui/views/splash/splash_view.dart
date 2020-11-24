@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,18 +15,20 @@ class SplashView extends HookWidget {
   final ScreenInfoViewModel _s = locator();
   final SecureStorage _ss = locator();
 
+  final splashViewModel = ChangeNotifierProvider<SplashViewModel>((_) => SplashViewModel());
+
   @override
   Widget build(BuildContext context) {
     final user = useProvider(userProvider);
+    final vm = useProvider(splashViewModel);
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
 
     double _margin;
 
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-      if (context == null || _s.splashDown) return;
-      _s.splashDown = true;
-      runLater(context, sectionName, user.hasPermission, user.shouldLogin);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (context == null) return;
+      runLater(context, vm, sectionName, user.hasPermission, user.shouldLogin);
     });
 
     bool _kbVisible = context.mq.viewInsets.bottom > 10;
@@ -71,14 +72,15 @@ class SplashView extends HookWidget {
     );
   }
 
-  void runLater(
-      BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
+  void runLater(BuildContext context, SplashViewModel vm, String sectionName, bool hasPermission,
+      bool shouldLogin) async {
     await Future.delayed(Duration(seconds: 2));
 
+    if (context == null) return;
+
     if (!hasPermission) {
-      _l.log(sectionName, 'Rebuilding SplashView', always: false);
-      (context as Element).markNeedsBuild();
-      (context as Element).rebuild();
+      _l.log(sectionName, 'Rebuild initiated');
+      vm.rebuild();
       return;
     }
     if (!await _ss.doctorBoxKeySet) {
@@ -95,4 +97,8 @@ class SplashView extends HookWidget {
       Navigator.pushReplacementNamed(context, homeRoute);
     }
   }
+}
+
+class SplashViewModel with ChangeNotifier {
+  void rebuild() => notifyListeners();
 }

@@ -22,9 +22,9 @@ class DateInputWidget extends HookWidget {
     if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return TextFormField(
-      controller: useTextEditingController(),
+      controller: useTextEditingController.fromValue(TextEditingValue(text: item.value ?? "")),
       inputFormatters: maskTextInputFormatterList,
-      initialValue: item.value,
+      // initialValue: ,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
       onEditingComplete: () {

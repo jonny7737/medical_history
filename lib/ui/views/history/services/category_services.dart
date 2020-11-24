@@ -5,9 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:medical_history/ui/views/history/models/category.dart';
 import 'package:medical_history/ui/views/history/models/category_list.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryServices {
   final String kHistoryFormContent = 'lib/ui/views/history/form_content/categories.json';
+
+  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   CategoriesList cat;
 
   Future<List<Category>> get categories async => await Future.microtask(() async {
@@ -16,7 +19,9 @@ class CategoryServices {
       });
 
   Future<void> _loadCategories() async {
-    final String jsonString = await rootBundle.loadString(kHistoryFormContent);
+    String jsonString = await _loadPrefs();
+    if (jsonString == null || jsonString.isEmpty)
+      jsonString = await rootBundle.loadString(kHistoryFormContent);
     final parsedJson = json.decode(jsonString);
 
     cat = CategoriesList.fromJson(parsedJson);
@@ -25,7 +30,7 @@ class CategoryServices {
   Future saveCategories() async {
     print('dart-2-json');
     print(jsonEncode(cat));
-    //  TODO: Add JSON save code here.
+    _savePrefs(jsonEncode(cat));
   }
 
   bool shakeIt(int id) {
@@ -36,5 +41,15 @@ class CategoryServices {
       if (item?.value != null) notShakeIt = notShakeIt || item.value.length > 0;
     });
     return !notShakeIt;
+  }
+
+  Future<String> _loadPrefs() async {
+    SharedPreferences prefs = await _prefs;
+    return prefs.getString("history_data");
+  }
+
+  void _savePrefs(String json) async {
+    SharedPreferences prefs = await _prefs;
+    prefs.setString("history_data", json);
   }
 }

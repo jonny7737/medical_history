@@ -18,7 +18,8 @@ class HistoryView extends HookWidget {
 
     _model.sectionName = this.runtimeType.toString();
     _l.initSectionPref(_model.sectionName);
-    _l.log(_model.sectionName, '(Re-)Building', linenumber: _l.lineNumber(StackTrace.current));
+    _l.log(_model.sectionName, '(Re-)Building',
+        linenumber: _l.lineNumber(StackTrace.current), always: true);
 
     return SafeArea(
       child: Scaffold(
