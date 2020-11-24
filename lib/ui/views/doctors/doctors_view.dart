@@ -41,7 +41,11 @@ class DoctorsView extends StatelessWidget {
             ),
           ],
         ),
-        body: DoctorListView(),
+        body: Stack(children: [
+          // This is the BACKGROUND image
+          Center(child: Image.asset("assets/doctor-1.png")),
+          DoctorListView(),
+        ]),
       ),
     );
   }

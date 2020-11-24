@@ -87,7 +87,7 @@ class MedsView extends HookWidget {
                 top: context.heightPct(0.20),
                 left: (context.widthPct(0.15)),
                 child: Image.asset(
-                  'assets/meds.png',
+                  'assets/drug-2.png',
                   width: context.widthPct(0.70),
                 ),
               ),
