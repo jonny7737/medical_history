@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:medical_history/ui/views/history/models/category.dart';
 import 'package:medical_history/ui/views/history/models/category_list.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryServices {
   final String kHistoryFormContent = 'lib/ui/views/history/form_content/categories.json';
 
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  final storage = FlutterSecureStorage();
   CategoriesList cat;
 
   Future<List<Category>> get categories async => await Future.microtask(() async {
@@ -28,8 +28,7 @@ class CategoryServices {
   }
 
   Future saveCategories() async {
-    print('dart-2-json');
-    print(jsonEncode(cat));
+    print('dart-2-json\n' + jsonEncode(cat));
     _savePrefs(jsonEncode(cat));
   }
 
@@ -44,12 +43,10 @@ class CategoryServices {
   }
 
   Future<String> _loadPrefs() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getString("history_data");
+    return await storage.read(key: "history_data");
   }
 
   void _savePrefs(String json) async {
-    SharedPreferences prefs = await _prefs;
-    prefs.setString("history_data", json);
+    storage.write(key: "history_data", value: json);
   }
 }
