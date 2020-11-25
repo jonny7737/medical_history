@@ -11,6 +11,7 @@ class LoginButtonWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// TODO: Look for code duplication in screen info
     var _kbVisible = context.mq.viewInsets.bottom > 10;
     bool _smallScreen = context.diagonalInches < 5.0;
     bool _mediumScreen = !_smallScreen && context.diagonalInches < 5.6;

@@ -29,14 +29,14 @@ class HiveSetup {
         Hive.deleteBoxFromDisk(kMedHiveBox),
         Hive.deleteBoxFromDisk(kDoctorHiveBox),
       ]);
-      _initializeFakeData();
+      // _initializeFakeData();
     }
     _l.log(sectionName, 'HiveSetup complete');
   }
 
-  Future _initializeFakeData() async {
-    // RepositoryService repository = locator();
-    // await repository.initializeMedData();
-    // await repository.initializeDoctorData();
-  }
+  // Future _initializeFakeData() async {
+  //   // RepositoryService repository = locator();
+  //   // await repository.initializeMedData();
+  //   // await repository.initializeDoctorData();
+  // }
 }

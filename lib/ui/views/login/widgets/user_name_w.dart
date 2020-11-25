@@ -37,11 +37,7 @@ class UserNameWidget extends StatelessWidget {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsets.only(
-                  left: 30.0,
-                  right: 30.0,
-                  bottom: 10.0,
-                ),
+                padding: EdgeInsets.only(left: 30.0, right: 30.0, bottom: 10.0),
                 child: LoginFormWidget(
                   formKey: _formKey,
                   formData: _formData,

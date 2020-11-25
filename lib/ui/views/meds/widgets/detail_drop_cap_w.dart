@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:medical_history/core/helpers/hero_dialog_route.dart';
+import 'package:medical_history/ui/views/widgets/hero_dialog_route.dart';
 import 'package:medical_history/core/models/med_data.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/ui/view_model/screen_info_provider.dart';

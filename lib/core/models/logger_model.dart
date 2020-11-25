@@ -12,13 +12,6 @@ class LoggerModel {
     prefs = await _prefs;
   }
 
-  void runLater(String sectionName) async {
-    _prefs.then((SharedPreferences prefs) {
-      if (prefs.containsKey('MH-' + sectionName)) return;
-      prefs.setBool('MH-' + sectionName, false);
-    });
-  }
-
   List<String> allKeys() {
     List<String> keyList = [];
     var keys = prefs.getKeys().toList();
@@ -32,12 +25,19 @@ class LoggerModel {
 
   void initSectionPref(String sectionName) async {
     if (prefs == null) {
-      runLater(sectionName);
+      updateSections(sectionName);
       return;
     }
     if (prefs.containsKey('MH-' + sectionName)) return;
     prefs.setBool('MH-' + sectionName, false);
     return;
+  }
+
+  void updateSections(String sectionName) async {
+    _prefs.then((SharedPreferences prefs) {
+      if (prefs.containsKey('MH-' + sectionName)) return;
+      prefs.setBool('MH-' + sectionName, false);
+    });
   }
 
   void removeSection(String sectionName) => prefs.remove('MH-' + sectionName);

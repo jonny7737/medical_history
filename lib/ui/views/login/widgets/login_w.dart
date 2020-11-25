@@ -34,11 +34,8 @@ class LoginWidget extends HookWidget {
             }
             if (_formData['name'] != null && _formData['name'].length > 2) {
               _formKey.currentState.save();
-              _l.log(
-                sectionName,
-                "Login name: ${_formData['name']}",
-                linenumber: _l.lineNumber(StackTrace.current),
-              );
+              _l.log(sectionName, "Login name: ${_formData['name']}",
+                  linenumber: _l.lineNumber(StackTrace.current));
               context.read(userProvider).login(_formData['name']);
               _formData['name'] = null;
 
