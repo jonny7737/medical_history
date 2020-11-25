@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medical_history/core/constants.dart';
+import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/core/services/secure_storage.dart';
+import 'package:medical_history/ui/view_model/user_provider.dart';
 
 class SplashViewModel {
   final Logger _l = locator();
   final SecureStorage _ss = locator();
+  final container = ProviderContainer();
 
-  void runLater(
-      BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
+  SplashViewModel() {
+    user = container.read(userProvider);
+    hasPermission = user.requestPermission();
+  }
+
+  Future<bool> hasPermission;
+  UserProvider user;
+
+  void nextStep(BuildContext context, String sectionName) async {
     await Future.delayed(Duration(milliseconds: 500));
 
     if (context == null) return;
@@ -20,7 +31,7 @@ class SplashViewModel {
         _l.log(sectionName, 'Executing Login Route', always: false);
         Navigator.pushReplacementNamed(context, loginRoute);
       });
-    } else if (shouldLogin) {
+    } else if (user.shouldLogin) {
       _l.log(sectionName, 'Executing Login Route', always: false);
       Navigator.pushReplacementNamed(context, loginRoute);
     } else {

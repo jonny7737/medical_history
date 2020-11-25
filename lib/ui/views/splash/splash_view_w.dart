@@ -17,7 +17,9 @@ class SplashViewWidget extends HookWidget {
     bool _kbVisible = context.mq.viewInsets.bottom > 10;
     if (_kbVisible && (_s.isSmallScreen || _s.isMediumScreen)) {
       _margin = context.widthPct(0.30);
-    } else if (!_kbVisible || _s.isLargeScreen) _margin = context.read(themeDataProvider).appMargin;
+    } else if (!_kbVisible || _s.isLargeScreen) {
+      _margin = context.read(themeDataProvider).appMargin;
+    }
 
     return SafeArea(
       child: Scaffold(

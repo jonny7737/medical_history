@@ -21,6 +21,7 @@ class UserModel {
       _allowWriteFile = true;
       return true;
     } else
+      //  Permission denied.
       return false;
   }
 
