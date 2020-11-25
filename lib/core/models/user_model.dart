@@ -4,27 +4,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserModel {
   SharedPreferences prefs;
   bool _allowWriteFile = false;
-  bool _awaitingPermission = false;
 
   UserModel() {
     init();
   }
 
   init() async {
-    if (!_allowWriteFile) await requestPermissions();
     prefs = await SharedPreferences.getInstance();
   }
 
   bool get hasPermission => _allowWriteFile;
 
-  requestPermissions() async {
-    if (_awaitingPermission) return;
-    _awaitingPermission = true;
-
+  Future<bool> requestPermissions() async {
     if (await Permission.storage.request().isGranted) {
       // Either the permission was already granted before or the user just granted it.
       _allowWriteFile = true;
-    }
+      return true;
+    } else
+      return false;
   }
 
   static const String _IS_LOGGED_IN = "is_logged_in";

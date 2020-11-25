@@ -13,8 +13,8 @@ class UserProvider with ChangeNotifier {
 
   bool get hasPermission => userModel.hasPermission;
 
-  void requestPermission() {
-    userModel.requestPermissions();
+  Future<bool> requestPermission() async {
+    return await userModel.requestPermissions();
   }
 
   init() {
