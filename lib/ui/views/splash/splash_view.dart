@@ -9,7 +9,7 @@ import 'package:medical_history/ui/views/splash/splash_viewmodel.dart';
 
 class SplashView extends HookWidget {
   final Logger _l = locator();
-  final SplashViewModel splashViewModel = SplashViewModel();
+  final splashViewModel = SplashViewModel();
 
   @override
   Widget build(BuildContext context) {

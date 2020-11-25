@@ -10,7 +10,7 @@ class SplashViewModel {
 
   void runLater(
       BuildContext context, String sectionName, bool hasPermission, bool shouldLogin) async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 500));
 
     if (context == null) return;
 
