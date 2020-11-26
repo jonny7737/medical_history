@@ -66,9 +66,10 @@ class CheckBoxWidget extends StatelessWidget {
 
 ///************************************************************************
 class TextInputWidget extends StatelessWidget {
-  const TextInputWidget({Key key, @required this.item}) : super(key: key);
+  const TextInputWidget({Key key, @required this.item, this.editable = true}) : super(key: key);
 
   final Item item;
+  final bool editable;
 
   @override
   Widget build(BuildContext context) {
@@ -94,9 +95,14 @@ class TextInputWidget extends StatelessWidget {
         item.setValue(value);
       },
       decoration: InputDecoration(
+        disabledBorder: InputBorder.none,
+        enabled: editable,
         filled: true,
         isCollapsed: true,
         hintText: item.hintText,
+        hintStyle: editable
+            ? null
+            : TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       ),
     );
   }

@@ -63,7 +63,14 @@
       "name": "procedures",
       "title": "Procedures / Surgeries",
       "type": "string",
-      "items": []
+      "items": [
+        {
+          "id": 50,
+          "label": "surgery1",
+          "type": "info",
+          "hintText": "Your first surgery was what?"
+        }
+      ]
     }
   ]
 }
