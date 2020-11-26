@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:medical_history/ui/views/login/widgets/form_error_w.dart';
 import 'package:medical_history/ui/views/login/widgets/login_form_w.dart';
 import 'package:sized_context/sized_context.dart';
@@ -12,14 +14,15 @@ class UserNameWidget extends StatelessWidget {
         _formData = formData,
         super(key: key);
 
+  final ScreenInfoViewModel _s = locator();
+
   final GlobalKey<FormState> _formKey;
   final Map<String, String> _formData;
 
   @override
   Widget build(BuildContext context) {
-    var smallScreen = context.diagonalInches < 5.2;
     return Container(
-        height: smallScreen ? context.heightPct(0.08) : context.heightPct(0.06),
+        height: _s.isSmallScreen ? context.heightPct(0.08) : context.heightPct(0.06),
         margin: EdgeInsets.only(
           top: context.heightPct(0.02),
           left: context.widthPct(0.10),

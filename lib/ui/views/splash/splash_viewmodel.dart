@@ -24,6 +24,7 @@ class SplashViewModel {
     await Future.delayed(Duration(milliseconds: 500));
 
     if (context == null) return;
+    // print('--$context');
 
     if (!await _ss.doctorBoxKeySet) {
       _l.log(sectionName, 'Executing KeyGen Route', always: false);

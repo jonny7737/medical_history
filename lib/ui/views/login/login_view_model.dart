@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class LoginViewModel with ChangeNotifier {
   final double _errorMsgMaxHeight = 35;

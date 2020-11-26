@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/all.dart';
 import 'package:medical_history/core/global_providers.dart';
+import 'package:medical_history/core/locator.dart';
+import 'package:medical_history/ui/view_model/screen_info_provider.dart';
 import 'package:sized_context/sized_context.dart';
 
 class LoginButtonWidget extends HookWidget {
+  final ScreenInfoViewModel _s = locator();
   final Function onButtonClick;
 
   LoginButtonWidget(this.onButtonClick);
 
   @override
   Widget build(BuildContext context) {
-    /// TODO: Look for code duplication in screen info
     var _kbVisible = context.mq.viewInsets.bottom > 10;
-    bool _smallScreen = context.diagonalInches < 5.0;
-    bool _mediumScreen = !_smallScreen && context.diagonalInches < 5.6;
-    bool _largeScreen = context.diagonalInches > 5.6;
-
-//    print("Dia Inches: ${context.diagonalInches}");
-//    print("$_smallScreen : $_mediumScreen : $_largeScreen");
 
     double top;
-    if (_smallScreen) {
+    if (_s.isSmallScreen) {
       top = _kbVisible ? context.heightPct(0.36) : context.heightPct(0.75);
-    } else if (_mediumScreen) {
+    } else if (_s.isMediumScreen) {
       top = _kbVisible ? context.heightPct(0.42) : context.heightPct(0.65);
-    } else if (_largeScreen) {
+    } else if (_s.isLargeScreen) {
       top = _kbVisible ? context.heightPct(0.43) : context.heightPct(0.60);
     }
 

@@ -22,7 +22,6 @@ class SetupScreenInfo extends HookWidget {
 
     if (_s.isSetup || _s.runningSetup) return Material(color: Colors.yellow[300]);
     _s.runningSetup = true;
-    // _l.setLogging(_l.logsEnabled(LOGGING_APP));
 
     //  This is the first 'context' with a MediaQuery, therefore,
     //  this is the first opportunity to set these values.

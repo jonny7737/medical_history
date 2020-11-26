@@ -5,7 +5,7 @@ import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
 import 'package:medical_history/ui/view_model/logger_provider.dart';
 
-final loggerProvider = ChangeNotifierProvider((ref) => LoggerProvider());
+final loggerProvider = ChangeNotifierProvider((_) => LoggerProvider());
 
 class LoggerMenuWidget extends HookWidget {
   final Logger _l = locator();

@@ -19,6 +19,7 @@ class SplashView extends HookWidget {
         builder: (_, snapshot) {
           if (snapshot.hasData && snapshot.data)
             WidgetsBinding.instance.addPostFrameCallback((_) {
+              // print('-$context');
               model.nextStep(context, sectionName);
             });
           if (snapshot.hasData && !snapshot.data) {
