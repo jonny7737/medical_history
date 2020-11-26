@@ -54,6 +54,9 @@ class _DynamicFormState extends State<DynamicForm> {
         case 'string':
           _formWidgets.add(TextInputWidget(item: item));
           break;
+        case 'info':
+          _formWidgets.add(TextInputWidget(item: item, editable: false));
+          break;
         case 'checkbox':
           _formWidgets.add(CheckBoxWidget(item: item));
           break;
