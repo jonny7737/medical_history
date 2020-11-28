@@ -42,6 +42,7 @@ class RowTitleWidget extends HookWidget {
         _controller.reverse();
       }
     });
+
     return Column(
       children: [
         Row(

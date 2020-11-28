@@ -35,8 +35,19 @@ class HomeViewModel with ChangeNotifier {
     _doctorRepo.addListener(update);
   }
 
+  bool isDisposed = false;
+
+  @override
+  void dispose() {
+    _l.log(sectionName, 'Dispose was called', linenumber: _l.lineNumber(StackTrace.current));
+    isDisposed = true;
+    _doctorRepo.removeListener(update);
+    super.dispose();
+  }
+
   //////////////////////////////////////////////////////////////////////
   void reAnimate() {
+    if (isDisposed) return;
     logoOpacity = 1.0;
     iconTop = {records: 0.30, doctors: 0.30, meds: 0.30, 'other': 0.30};
     iconLeft = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
@@ -112,16 +123,6 @@ class HomeViewModel with ChangeNotifier {
 
   //////////////////////////////////////////////////////////////////////
   void update() => notifyListeners();
-
-  bool isDisposed = false;
-
-  @override
-  void dispose() {
-    _l.log(sectionName, 'Dispose was called', linenumber: _l.lineNumber(StackTrace.current));
-    isDisposed = true;
-    _doctorRepo.removeListener(update);
-    super.dispose();
-  }
 
   bool _modelDirty = false;
   bool get isModelDirty => _modelDirty;

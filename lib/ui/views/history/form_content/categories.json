@@ -7,7 +7,8 @@
       "_1a": "items list is required, even if empty '[]'",
       "_2": "data input forms are laid out in 'item' order",
       "_3": "item['lastItem'] is a mechanism for instructing the form generator to switch the keyboard to submit",
-      "_4": "item['value'] is the current saved value for this item"
+      "_4": "item['value'] is the current saved value for this item",
+      "_5": "if item['type'] = 'info', hintText is displayed and not editable"
     },
   "categories": [
     {
@@ -42,7 +43,14 @@
       "name": "allergies",
       "title": "All known allergies",
       "type": "string",
-      "items": []
+      "items": [
+        {
+          "id": 20,
+          "label": "allergy1",
+          "type": "info",
+          "hintText": "You are allergic to what?"
+        }
+      ]
     },
     {
       "id": 3,
@@ -54,22 +62,29 @@
     {
       "id": 4,
       "name": "medications",
-      "title": "All current medications / supplements",
+      "title": "Current medications / supplements",
       "type": "string",
       "items": []
     },
     {
       "id": 5,
       "name": "procedures",
-      "title": "Procedures / Surgeries",
-      "type": "string",
+      "title": "Surgeries / Procedures",
+      "type": "expandable",
       "items": [
         {
           "id": 50,
-          "label": "surgery1",
-          "type": "info",
-          "hintText": "Your first surgery was what?"
+          "label": "surgery0",
+          "type": "string",
+          "hintText": "Add a surgery or procedure"
+        },
+        {
+          "id": 51,
+          "label": "surgery0",
+          "type": "date",
+          "hintText": "Date of surgery or procedure"
         }
+
       ]
     }
   ]

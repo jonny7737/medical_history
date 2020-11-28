@@ -44,7 +44,7 @@ class _DynamicFormState extends State<DynamicForm> {
     if (controller.expanded) controller.toggle();
 
     _cs.saveCategories();
-    setState(() {});
+    // setState(() {});
   }
 
   void assembleForm() {

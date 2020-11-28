@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
@@ -24,6 +25,13 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
 
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
+
+    if (!user.isLoggedIn) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        context.read(userProvider).logout();
+        Navigator.pushReplacementNamed(context, loginRoute);
+      });
+    }
 
     return AppBar(
       backgroundColor: themeProvider.isDarkTheme ? Colors.black87 : null,
@@ -50,6 +58,15 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
       actions: <Widget>[
         if (isDebugMode)
           IconButton(
+            tooltip: "Fake session expire",
+            icon: Icon(Icons.clear, color: Colors.white),
+            padding: EdgeInsets.all(0.0),
+            onPressed: () {
+              context.read(userProvider).logout();
+            },
+          ),
+        if (isDebugMode)
+          IconButton(
             tooltip: "Reanimate Home Screen",
             icon: Icon(Icons.autorenew, color: Colors.white),
             padding: EdgeInsets.all(0.0),
@@ -57,23 +74,6 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
               context.read(homeViewModel).reAnimate();
             },
           ),
-        // // IconButton(
-        //   tooltip: "Add a new medication",
-        //   icon: Icon(Icons.add_circle, color: Colors.white),
-        //   padding: EdgeInsets.all(0.0),
-        //   onPressed: () async {
-        //     // _l.log(sectionName, 'Number of Doctors available: ${_model.numberOfDoctors}');
-        //     if (_model.numberOfDoctors == 0) {
-        //       _model.showAddMedError();
-        //       // return;
-        //     } else {
-        //       bool result = await Navigator.pushNamed<bool>(context, addMedRoute);
-        //       if (result != null && result) {
-        //         _model.modelDirty(true);
-        //       }
-        //     }
-        //   },
-        // ),
         IconButton(
           tooltip: "Dark Mode On/Off",
           icon: Icon(

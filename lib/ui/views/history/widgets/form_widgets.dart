@@ -39,7 +39,7 @@ class DateInputWidget extends HookWidget {
           FocusScope.of(context).unfocus();
       },
       onSaved: (value) {
-        // print('onSaved ${item.id}:${item.label} with VALUE: [$value] is !MT [${value.isEmpty}]');
+        print('onSaved ${item.id}:${item.label} with VALUE: [$value] is !MT [${value.isEmpty}]');
         item.setValue(value);
       },
       decoration: InputDecoration(
@@ -79,6 +79,16 @@ class TextInputWidget extends StatelessWidget {
       initialValue: item.value,
       style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
       textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
+      decoration: InputDecoration(
+        disabledBorder: InputBorder.none,
+        enabled: editable,
+        filled: true,
+        isCollapsed: true,
+        hintText: item.hintText,
+        hintStyle: editable
+            ? null
+            : TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
+      ),
       onEditingComplete: () {
         print('onEditingComplete');
         if (lastItem) SystemChannels.textInput.invokeMethod('TextInput.hide');
@@ -91,19 +101,9 @@ class TextInputWidget extends StatelessWidget {
           FocusScope.of(context).nextFocus();
       },
       onSaved: (value) {
-        // print('onSaved ${item.id}:${item.label} with VALUE: $value');
+        print('onSaved ${item.id}:${item.label} with VALUE: $value');
         item.setValue(value);
       },
-      decoration: InputDecoration(
-        disabledBorder: InputBorder.none,
-        enabled: editable,
-        filled: true,
-        isCollapsed: true,
-        hintText: item.hintText,
-        hintStyle: editable
-            ? null
-            : TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
-      ),
     );
   }
 }
@@ -117,7 +117,6 @@ class SubmitButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ElevatedButton eb = ElevatedButton(onPressed: null, child: null);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: ElevatedButton(
@@ -134,3 +133,5 @@ class SubmitButton extends StatelessWidget {
     );
   }
 }
+
+///************************************************************************

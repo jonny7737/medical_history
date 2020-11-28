@@ -11,13 +11,14 @@ class SplashView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final model = useProvider(splashViewModel);
+    final isMounted = useIsMounted();
 
     final sectionName = this.runtimeType.toString();
 
     return FutureBuilder(
         future: model.hasPermission,
         builder: (_, snapshot) {
-          if (snapshot.hasData && snapshot.data)
+          if (isMounted() && snapshot.hasData && snapshot.data)
             WidgetsBinding.instance.addPostFrameCallback((_) {
               // print('-$context');
               model.nextStep(context, sectionName);

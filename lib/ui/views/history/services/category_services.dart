@@ -43,6 +43,12 @@ class CategoryServices {
   }
 
   Future<String> _loadPrefs() async {
+    bool debug = false;
+    assert(debug = true);
+    if (debug) {
+      print('DEBUG MODE: history data not loaded from prefs');
+      return Future.value(null);
+    }
     return await storage.read(key: "history_data");
   }
 
