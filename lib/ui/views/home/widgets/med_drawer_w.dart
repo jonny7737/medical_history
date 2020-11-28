@@ -101,6 +101,13 @@ class MedDrawer extends HookWidget {
                   Navigator.pushNamed(context, keygenRoute);
                 },
               ),
+            ListTile(
+              leading: Icon(Icons.all_inclusive_sharp),
+              title: Text('Why', style: TextStyle(fontSize: fontSize)),
+              onTap: () {
+                showWhyInfo(context);
+              },
+            ),
           ],
         ),
       ),
@@ -138,6 +145,28 @@ class MedDrawer extends HookWidget {
           'Options drawer designed by\n\t\tMarcin Szałek',
           style: TextStyle(fontSize: context.heightPct(0.020)),
         )
+      ],
+    );
+  }
+
+  void showWhyInfo(BuildContext context) {
+    showAboutDialog(
+      context: context,
+      applicationIcon: Image.asset(
+        'assets/meds.png',
+        height: context.heightPct(0.15),
+      ),
+      applicationName: 'Medical History',
+      applicationVersion: '${_s.version}+${_s.buildNumber}',
+      children: [
+        Text(
+          'The purpose of this application is to provided an opportunity to explore Google Flutter '
+          'to a much greater extent than the typical "counter" and "todo list" tutorials.  '
+          'It includes explorations of animations, network API requests, secure data storage, '
+          'encryption key generation and just about any other aspect of Flutter that could be '
+          'reasonably included without cluttering the codebase.\n',
+          style: TextStyle(fontSize: context.heightPct(0.020)),
+        ),
       ],
     );
   }
