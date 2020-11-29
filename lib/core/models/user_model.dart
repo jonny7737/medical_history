@@ -51,7 +51,7 @@ class UserModel {
 
   bool login(String name) {
     if (!_allowWriteFile || prefs == null) return false;
-    if (isLoggedIn() == true) {
+    if (isLoggedIn == true) {
       return true;
     }
     var now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
@@ -66,7 +66,9 @@ class UserModel {
     return true;
   }
 
-  bool isLoggedIn() {
+  bool get isLoggedIn => _isLoggedIn();
+
+  bool _isLoggedIn() {
     if (!_allowWriteFile || prefs == null) init();
     var expirey = prefs?.getInt(_EXPIRE);
     if (expirey == null) {

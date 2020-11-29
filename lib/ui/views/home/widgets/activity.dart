@@ -9,21 +9,23 @@ import 'package:medical_history/ui/views/home/riverpods.dart';
 import 'package:sized_context/sized_context.dart';
 
 class Activity extends HookWidget {
+  final ScreenInfoViewModel _s = locator();
   final String activityName;
 
-  const Activity(this.activityName);
+  Activity(this.activityName);
 
   @override
   Widget build(BuildContext context) {
-    final ScreenInfoViewModel _s = locator();
     final _model = useProvider(homeViewModel);
 
     final double leftOffset = context.widthPct(_model.iconLeft[activityName] ?? 0);
 
     final double imageSize = context.heightPct(_s.isLargeScreen ? 0.15 : 0.20);
 
+    // print('(re)Building Activity: $activityName');
+
     return AnimatedPositioned(
-      top: context.heightPct(_model.iconTop[activityName]),
+      top: context.heightPct(context.read(homeViewModel).iconTop[activityName]),
       left: leftOffset,
       duration: Duration(milliseconds: 300),
       child: Material(
@@ -34,16 +36,16 @@ class Activity extends HookWidget {
         child: InkWell(
           onTap: () {
             SystemSound.play(SystemSoundType.click);
-            if (activityName == kMedsActivity && _model.numberOfDoctors == 0) {
-              _model.showAddMedError();
+            if (activityName == kMedsActivity && context.read(homeViewModel).numberOfDoctors == 0) {
+              context.read(homeViewModel).showAddMedError();
               return;
             }
-            Navigator.pushNamed(context, _model.activityRoute(activityName));
+            Navigator.pushNamed(context, context.read(homeViewModel).activityRoute(activityName));
           },
           child: Image(
             height: imageSize,
             width: imageSize,
-            image: AssetImage(_model.activityIcon(activityName)),
+            image: AssetImage(context.read(homeViewModel).activityIcon(activityName)),
           ),
         ),
       ),

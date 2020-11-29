@@ -35,8 +35,9 @@ class HomeViewModel with ChangeNotifier {
     _doctorRepo.addListener(update);
   }
 
-  bool isDisposed = false;
+  void update() => notifyListeners();
 
+  bool isDisposed = false;
   @override
   void dispose() {
     _l.log(sectionName, 'Dispose was called', linenumber: _l.lineNumber(StackTrace.current));
@@ -45,20 +46,30 @@ class HomeViewModel with ChangeNotifier {
     super.dispose();
   }
 
+  void logout() {
+    _user.logout();
+    runOnce = false;
+  }
+
   //////////////////////////////////////////////////////////////////////
   void reAnimate() {
+    _l.log(sectionName, 'reAnimate now', linenumber: _l.lineNumber(StackTrace.current));
     if (isDisposed) return;
+
     logoOpacity = 1.0;
     iconTop = {records: 0.30, doctors: 0.30, meds: 0.30, 'other': 0.30};
     iconLeft = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
     iconRight = {records: 0.35, doctors: 0.35, meds: 0.35, 'other': 0.35};
     isLogoAnimating = true;
     notifyListeners();
-    Future.delayed(Duration(seconds: 1)).then((value) => startAnimations());
+    Future.delayed(Duration(seconds: 1)).then((_) {
+      startAnimations();
+    });
   }
 
   //////////////////////////////////////////////////////////////////////
   void startAnimations() async {
+    if (isDisposed) return;
     await animateLogo();
     await animateIcon(iconName: doctors);
     await animateIcon(iconName: records);
@@ -68,6 +79,7 @@ class HomeViewModel with ChangeNotifier {
   //////////////////////////////////////////////////////////////////////
   double logoOpacity = 1.0;
   bool isLogoAnimating = false;
+
   Future animateLogo() async {
     isLogoAnimating = true;
     await Future.delayed(Duration(milliseconds: 300));
@@ -88,6 +100,8 @@ class HomeViewModel with ChangeNotifier {
   Map iconRight;
 
   Future animateIcon({@required String iconName}) async {
+    if (iconTop[iconName] == iconTopEnd[iconName]) return;
+
     iconTop[iconName] = iconTopEnd[iconName];
 
     iconLeft[iconName] = iconLeftEnd[iconName];
@@ -122,8 +136,6 @@ class HomeViewModel with ChangeNotifier {
   }
 
   //////////////////////////////////////////////////////////////////////
-  void update() => notifyListeners();
-
   bool _modelDirty = false;
   bool get isModelDirty => _modelDirty;
   void modelDirty(bool value) {

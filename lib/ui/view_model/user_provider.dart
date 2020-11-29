@@ -21,7 +21,7 @@ class UserProvider with ChangeNotifier {
     _refreshAllStates();
   }
 
-  bool get isLoggedIn => userModel.isLoggedIn();
+  bool get isLoggedIn => userModel.isLoggedIn;
   String get name => userModel.getName();
 
   int get logoutTime {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:medical_history/core/constants.dart';
 import 'package:medical_history/core/global_providers.dart';
 import 'package:medical_history/core/locator.dart';
 import 'package:medical_history/core/services/logger.dart';
@@ -25,13 +24,6 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
 
     final sectionName = this.runtimeType.toString();
     _l.initSectionPref(sectionName);
-
-    if (!user.isLoggedIn) {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        context.read(userProvider).logout();
-        Navigator.pushReplacementNamed(context, loginRoute);
-      });
-    }
 
     return AppBar(
       backgroundColor: themeProvider.isDarkTheme ? Colors.black87 : null,
@@ -62,12 +54,14 @@ class HomeAppBar extends HookWidget implements PreferredSizeWidget {
             icon: Icon(Icons.clear, color: Colors.white),
             padding: EdgeInsets.all(0.0),
             onPressed: () {
-              context.read(userProvider).logout();
+              _l.log(sectionName, 'Logout action', linenumber: _l.lineNumber(StackTrace.current));
+              context.read(homeViewModel).logout();
+              // Navigator.pushReplacementNamed(context, loginRoute);
             },
           ),
         if (isDebugMode)
           IconButton(
-            tooltip: "Reanimate Home Screen",
+            tooltip: "reAnimate Home Screen",
             icon: Icon(Icons.autorenew, color: Colors.white),
             padding: EdgeInsets.all(0.0),
             onPressed: () {
