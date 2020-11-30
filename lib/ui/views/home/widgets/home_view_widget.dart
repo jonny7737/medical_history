@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medical_history/core/locator.dart';
-import 'package:medical_history/core/models/user_model.dart';
 import 'package:medical_history/core/services/logger.dart';
+import 'package:medical_history/ui/views/home/home_viewmodel.dart';
 import 'package:medical_history/ui/views/home/riverpods.dart';
 import 'package:medical_history/ui/views/home/widgets/activity.dart';
 import 'package:medical_history/ui/views/home/widgets/app_bar_w.dart';
@@ -13,7 +13,6 @@ import 'package:medical_history/core/constants.dart';
 
 class HomeViewWidget extends HookWidget {
   final Logger _l = locator();
-  final UserModel _user = locator();
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +21,6 @@ class HomeViewWidget extends HookWidget {
 
     _l.log(sectionName, '(Re)building', linenumber: _l.lineNumber(StackTrace.current));
 
-    if (!_user.isLoggedIn) return Container();
-
     if (context.read(homeViewModel).runOnce == false) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         if (context == null) return;
@@ -31,6 +28,8 @@ class HomeViewWidget extends HookWidget {
       });
       context.read(homeViewModel).runOnce = true;
     }
+
+    HomeViewModel viewModel = useProvider(homeViewModel);
 
     return SafeArea(
       child: Scaffold(
@@ -44,9 +43,7 @@ class HomeViewWidget extends HookWidget {
 
             /// Remove the logo from the stack after opacity goes to 0.0.
             /// If not removed, it will cover Activity icons and prevent taps.
-            if (context.read(homeViewModel).isLogoAnimating ||
-                context.read(homeViewModel).logoOpacity > 0.0)
-              LogoWidget(),
+            if (viewModel.showLogo) LogoWidget(),
           ],
         ),
       ),

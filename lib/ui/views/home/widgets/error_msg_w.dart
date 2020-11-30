@@ -15,6 +15,7 @@ class ErrorMsgWidget extends HookWidget {
     final _model = useProvider(homeViewModel);
     final ScreenInfoViewModel _s = locator();
 
+    // print('ErrorMsg re-build');
     return Align(
       alignment: Alignment.topCenter,
       child: Material(

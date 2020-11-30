@@ -22,8 +22,6 @@ class Activity extends HookWidget {
 
     final double imageSize = context.heightPct(_s.isLargeScreen ? 0.15 : 0.20);
 
-    // print('(re)Building Activity: $activityName');
-
     return AnimatedPositioned(
       top: context.heightPct(context.read(homeViewModel).iconTop[activityName]),
       left: leftOffset,

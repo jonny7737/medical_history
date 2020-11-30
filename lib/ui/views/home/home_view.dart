@@ -25,19 +25,27 @@ class HomeView extends StatelessWidget {
       });
     }
 
-    if (!_userModel.isLoggedIn)
-      return SafeArea(
-        child: Scaffold(
-          body: Container(
-            child: Center(
-              child: Text(
-                'Logging out!',
-                style: TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
-              ),
+    if (!_userModel.isLoggedIn) return const NoContent();
+
+    return CustomDrawer(child: HomeViewWidget());
+  }
+}
+
+class NoContent extends StatelessWidget {
+  const NoContent();
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          child: Center(
+            child: Text(
+              'Logging out!',
+              style: TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
             ),
           ),
         ),
-      );
-    return CustomDrawer(child: HomeViewWidget());
+      ),
+    );
   }
 }

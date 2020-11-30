@@ -79,6 +79,7 @@ class HomeViewModel with ChangeNotifier {
   //////////////////////////////////////////////////////////////////////
   double logoOpacity = 1.0;
   bool isLogoAnimating = false;
+  bool get showLogo => isLogoAnimating || logoOpacity > 0.0;
 
   Future animateLogo() async {
     isLogoAnimating = true;
