@@ -6,14 +6,16 @@ class Category {
   final int id;
   final String name;
   final String title;
+  final String type;
   final List<Item> items;
 
-  Category({this.id, this.name, this.title, this.items});
+  Category({this.id, this.name, this.title, this.type, this.items});
 
   Category.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
         title = json['title'],
+        type = json['type'],
         items = parseItems(json);
 
   Map<String, dynamic> toJson() => {
@@ -28,16 +30,5 @@ class Category {
     var list = parsedJson['items'] as List;
     List<Item> itemList = list.map((data) => Item.fromJson(data, categoryID)).toList();
     return itemList;
-  }
-
-  String itemsString() {
-    String str = '';
-    for (var item in items) {
-      if (str.length == 0)
-        str = item.label;
-      else
-        str = str + ' : ' + item.label;
-    }
-    return str;
   }
 }

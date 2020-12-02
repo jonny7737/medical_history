@@ -7,8 +7,9 @@ import 'package:sized_context/sized_context.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
 
 class InputForm extends StatelessWidget {
-  const InputForm(this.items, {Key key}) : super(key: key);
+  const InputForm(this.categoryID, this.items, {Key key}) : super(key: key);
 
+  final int categoryID;
   final List<Item> items;
 
   @override
@@ -31,7 +32,7 @@ class InputForm extends StatelessWidget {
         width: context.widthPct(0.90),
 
         /// Build form here
-        child: items.isNotEmpty ? Center(child: DynamicForm(items)) : SizedBox(),
+        child: items.isNotEmpty ? Center(child: DynamicForm(categoryID, items)) : SizedBox(),
       ),
     );
   }

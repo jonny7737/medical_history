@@ -22,15 +22,26 @@ class CategoryServices {
     String jsonString = await _loadPrefs();
     if (jsonString == null || jsonString.isEmpty)
       jsonString = await rootBundle.loadString(kHistoryFormContent);
-    final parsedJson = json.decode(jsonString);
+    final parsedJson = jsonDecode(jsonString);
 
     cat = CategoriesList.fromJson(parsedJson);
   }
 
-  Future saveCategories() async {
-    print('dart-2-json\n' + jsonEncode(cat));
-    _savePrefs(jsonEncode(cat));
+  void saveCategories() => _savePrefs(jsonEncode(cat));
+  void _savePrefs(String json) => storage.write(key: "history_data", value: json);
+
+  Future<String> _loadPrefs() async {
+    bool debug = false;
+    // assert(debug = true);
+    if (debug) {
+      print('[CategoryServices]=> DEBUG MODE: history data not loaded from prefs');
+      return Future.value(null);
+    }
+
+    return await storage.read(key: "history_data");
   }
+
+  String categoryType(int id) => cat.categories.firstWhere((category) => category.id == id).type;
 
   bool shakeIt(int id) {
     final Category c = cat.categories.firstWhere((element) => element.id == id);
@@ -40,19 +51,5 @@ class CategoryServices {
       if (item?.value != null) notShakeIt = notShakeIt || item.value.length > 0;
     });
     return !notShakeIt;
-  }
-
-  Future<String> _loadPrefs() async {
-    bool debug = false;
-    assert(debug = true);
-    if (debug) {
-      print('DEBUG MODE: history data not loaded from prefs');
-      return Future.value(null);
-    }
-    return await storage.read(key: "history_data");
-  }
-
-  void _savePrefs(String json) async {
-    storage.write(key: "history_data", value: json);
   }
 }

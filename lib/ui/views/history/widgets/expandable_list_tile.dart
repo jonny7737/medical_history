@@ -23,7 +23,7 @@ class ExpandableListTile extends StatelessWidget {
         child: ScrollOnExpand(
           child: ExpandablePanel(
             header: RowTitleWidget(category.title, category.id),
-            expanded: InputForm(category.items),
+            expanded: InputForm(category.id, category.items),
           ),
         ),
       ),

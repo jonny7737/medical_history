@@ -7,8 +7,9 @@ import 'package:medical_history/ui/views/history/services/category_services.dart
 import 'package:medical_history/ui/views/history/widgets/form_widgets.dart';
 
 class DynamicForm extends StatefulWidget {
-  DynamicForm(this.items);
+  DynamicForm(this.categoryID, this.items);
 
+  final int categoryID;
   final List<Item> items;
 
   @override
@@ -49,24 +50,28 @@ class _DynamicFormState extends State<DynamicForm> {
 
   void assembleForm() {
     _formWidgets.add(SizedBox(height: 10));
-    for (var item in widget.items) {
-      switch (item.type) {
-        case 'string':
-          _formWidgets.add(TextInputWidget(item: item));
-          break;
-        case 'info':
-          _formWidgets.add(TextInputWidget(item: item, editable: false));
-          break;
-        case 'checkbox':
-          _formWidgets.add(CheckBoxWidget(item: item));
-          break;
-        case 'date':
-          _formWidgets.add(DateInputWidget(item: item));
-          break;
-        default:
-          break;
+
+    if (_cs.categoryType(widget.categoryID) == 'expandable')
+      _formWidgets.add(ExpandableInputWidget(items: widget.items));
+    else
+      for (var item in widget.items) {
+        switch (item.type) {
+          case 'string':
+            _formWidgets.add(TextInputWidget(item: item));
+            break;
+          case 'info':
+            _formWidgets.add(TextInputWidget(item: item, editable: false));
+            break;
+          case 'checkbox':
+            _formWidgets.add(CheckBoxWidget(item: item));
+            break;
+          case 'date':
+            _formWidgets.add(DateInputWidget(item: item));
+            break;
+          default:
+            break;
+        }
       }
-    }
     _formWidgets.add(SizedBox(height: 20));
     _formWidgets.add(SubmitButton(_formKey, saveFormData));
   }

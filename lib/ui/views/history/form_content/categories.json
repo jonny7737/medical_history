@@ -74,17 +74,16 @@
       "items": [
         {
           "id": 50,
-          "label": "surgery0",
+          "label": "surgery1",
           "type": "string",
           "hintText": "Add a surgery or procedure"
         },
         {
           "id": 51,
-          "label": "surgery0",
           "type": "date",
+          "label": "surgery1",
           "hintText": "Date of surgery or procedure"
         }
-
       ]
     }
   ]

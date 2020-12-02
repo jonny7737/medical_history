@@ -10,8 +10,8 @@ class HistoryViewModel with ChangeNotifier {
 
   Future<List<Category>> get categories async => await _cs.categories;
 
-  Future saveCategories() async {
-    await _cs.saveCategories();
+  void saveCategories() {
+    _cs.saveCategories();
     notifyListeners();
     return;
   }
