@@ -42,9 +42,10 @@ class Logger {
   /// ```
   ///
   void log(String source, String msg, {int linenumber, bool always = false}) {
-    bool enabled = false;
-    assert(enabled = true);
-    if (!enabled) return;
+    bool debugMode = false;
+    assert(debugMode = true); // Check for debug mode
+    if (!debugMode) return;
+
     if (!always && (!_model.isEnabled(source) || !_model.isEnabled(LOGGING_APP))) return;
 
     if (linenumber == null)
