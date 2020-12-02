@@ -15,6 +15,7 @@ class SplashViewModel {
   SplashViewModel() {
     user = container.read(userProvider);
     hasPermission = user.requestPermission();
+    print('SplashViewModel constructor complete');
   }
 
   Future<bool> hasPermission;
