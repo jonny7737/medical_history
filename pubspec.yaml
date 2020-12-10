@@ -18,7 +18,7 @@ dependencies:
   flutter_hooks: ^0.15.0
   hooks_riverpod: ^0.12.1
   shared_preferences: ^0.5.12+4
-  get_it: ^5.0.1
+  get_it: ^5.0.3
   permission_handler: ^5.0.1+1
   package_info: ^0.4.3+2
   flutter_spinkit: ^4.1.2+1
@@ -37,7 +37,7 @@ dependencies:
   network_to_file_image: ^2.3.6
   drop_cap_text: ^1.0.7
   expandable: ^4.1.4
-  json_serializable: ^3.5.0
+  json_serializable: ^3.5.1
   shaking_icon:
     path: '../shaking_icon'
 
@@ -47,7 +47,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^0.8.2
-  build_runner: ^1.10.6
+  build_runner: ^1.10.9
 
 flutter:
   uses-material-design: true
