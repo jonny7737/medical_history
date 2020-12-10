@@ -48,3 +48,5 @@ app.*.map.json
 /medical_history-icons/backup.txt
 /medical_history-icons.zip
 /MedicalHistory.pdf
+
+100.xml
