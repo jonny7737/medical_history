@@ -19,7 +19,7 @@ class SplashView extends HookWidget {
         future: model.hasPermission,
         builder: (_, snapshot) {
           if (snapshot.hasData && snapshot.data) {
-            print('SplashView got data: [${snapshot.data}]');
+            // print('SplashView got data: [${snapshot.data}]');
             WidgetsBinding.instance.addPostFrameCallback((_) {
               // print('-$context');
               if (isMounted()) model.nextStep(context, sectionName);

@@ -22,7 +22,7 @@ class MyApp extends HookWidget {
   Widget build(BuildContext context) {
     final String sectionName = this.runtimeType.toString();
     _l.log(sectionName, '(Re)building application...',
-        linenumber: _l.lineNumber(StackTrace.current), always: true);
+        linenumber: _l.lineNumber(StackTrace.current), always: false);
 
     /// Ensure these Providers have completed setup before proceeding
     if (!initializationComplete())
