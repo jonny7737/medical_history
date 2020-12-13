@@ -1,10 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medical_history/ui/views/history/models/item.dart';
 import 'package:medical_history/ui/views/history/widgets/dynamic_form_w.dart';
 import 'package:sized_context/sized_context.dart';
-
-import 'package:medical_history/ui/views/history/models/item.dart';
 
 class InputForm extends StatelessWidget {
   const InputForm(this.categoryID, this.items, {Key key}) : super(key: key);
@@ -32,7 +31,8 @@ class InputForm extends StatelessWidget {
         width: context.widthPct(0.90),
 
         /// Build form here
-        child: items.isNotEmpty ? Center(child: DynamicForm(categoryID, items)) : SizedBox(),
+        child: Center(child: DynamicForm(categoryID, items)),
+        // child: items.isNotEmpty ? Center(child: DynamicForm(categoryID, items)) : SizedBox(),
       ),
     );
   }

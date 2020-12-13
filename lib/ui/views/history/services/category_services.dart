@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show debugPrintSynchronously;
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:medical_history/ui/views/history/models/category.dart';
@@ -13,10 +14,10 @@ class CategoryServices {
   final storage = FlutterSecureStorage();
   CategoriesList cat;
 
-  Future<List<Category>> get categories async => await Future.microtask(() async {
-        if (cat?.categories == null) await _loadCategories();
-        return cat.categories;
-      });
+  Future<List<Category>> get categories async {
+    if (cat?.categories == null) await _loadCategories();
+    return cat.categories;
+  }
 
   Future<void> _loadCategories() async {
     String jsonString = await _loadPrefs();
@@ -27,8 +28,10 @@ class CategoryServices {
     cat = CategoriesList.fromJson(parsedJson);
   }
 
-  void saveCategories() => _savePrefs(jsonEncode(cat));
-  void _savePrefs(String json) => storage.write(key: "history_data", value: json);
+  void saveCategories() {
+    debugPrintSynchronously(jsonEncode(cat));
+    storage.write(key: "history_data", value: jsonEncode(cat));
+  }
 
   Future<String> _loadPrefs() async {
     bool debug = false;
@@ -41,10 +44,19 @@ class CategoryServices {
     return await storage.read(key: "history_data");
   }
 
+  void addItem(int id, Item newItem) {
+    cat.categories.firstWhere((category) => category.id == id).items.add(newItem);
+  }
+
   String categoryType(int id) => cat.categories.firstWhere((category) => category.id == id).type;
 
+  List<Item> baseItems(int id) {
+    final Category c = cat.categories.firstWhere((category) => category.id == id);
+    return c.baseItems;
+  }
+
   bool shakeIt(int id) {
-    final Category c = cat.categories.firstWhere((element) => element.id == id);
+    final Category c = cat.categories.firstWhere((category) => category.id == id);
 
     bool notShakeIt = false;
     c?.items?.forEach((Item item) {

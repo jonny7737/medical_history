@@ -45,14 +45,15 @@ class _DynamicFormState extends State<DynamicForm> {
     if (controller.expanded) controller.toggle();
 
     _cs.saveCategories();
-    // setState(() {});
   }
 
   void assembleForm() {
     _formWidgets.add(SizedBox(height: 10));
 
+    // debugPrint('Dynamic form: type = ${_cs.categoryType(widget.categoryID)}');
+
     if (_cs.categoryType(widget.categoryID) == 'expandable')
-      _formWidgets.add(ExpandableInputWidget(items: widget.items));
+      _formWidgets.add(ExpandableInputWidget(items: widget.items, categoryID: widget.categoryID));
     else
       for (var item in widget.items) {
         switch (item.type) {

@@ -1,41 +1,105 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:medical_history/ui/views/history/models/history_viewmodel.dart';
 import 'package:medical_history/ui/views/history/models/item.dart';
 
 ///************************************************************************
-class ExpandableInputWidget extends StatelessWidget {
-  const ExpandableInputWidget({Key key, @required this.items}) : super(key: key);
+final historyViewModel = ChangeNotifierProvider<HistoryViewModel>((ref) => HistoryViewModel());
+
+class ExpandableInputWidget extends HookWidget {
+  // final CategoryServices _cs = locator();
+
+  ExpandableInputWidget({Key key, @required this.items, @required this.categoryID})
+      : super(key: key);
+
   final List<Item> items;
+  final int categoryID;
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> rowChildren = [];
-    for (int i = 0; i < items.length; i += 2) {
-      rowChildren.add(TextInputWidget(item: items[i]));
-      if (items[i + 1].type == 'date')
-        rowChildren.add(DateInputWidget(item: items[i + 1]));
-      else if (items[i + 1].type == 'checkbox') rowChildren.add(CheckBoxWidget(item: items[i + 1]));
+    print('Building Expandable...');
+    HistoryViewModel _model = useProvider(historyViewModel);
+
+    void updateUI() {
+      _model.updateUI(categoryID);
+      print('updateUI[$categoryID]');
     }
 
-    return Column(
-      children: [
-        Row(
-          children: rowChildren,
-        ),
-      ],
-    );
+    // List<Item> baseItems = _model.baseItems(categoryID);
+    List<Widget> columnChildren = [];
+    int nextID = categoryID * 10;
+
+    if (_model.baseItems(categoryID) == null || _model.baseItems(categoryID).isEmpty) {
+      print('JSON Error:  ExpandableInputWidget requires baseItems');
+      return Container();
+    }
+    if (items.length != 0) {
+      for (int i = 0; i < items.length; i += 2) {
+        var row = Row(
+          children: [
+            TextInputWidget(item: items[i]),
+            if (items[i + 1].type == 'date')
+              DateInputWidget(item: items[i + 1], editComplete: updateUI),
+            if (items[i + 1].type == 'checkbox') CheckBoxWidget(item: items[i + 1])
+          ],
+        );
+        columnChildren.add(row);
+      }
+      nextID = items[items.length - 1].id + 1;
+    }
+
+    if (items.isNotEmpty) print('items[${items.length}].value[${items[items.length - 1].value}]');
+
+    if (items.length > 0) {
+      if (items[items.length - 1].value != null && items[items.length - 1].value.isNotEmpty)
+        columnChildren.addAll(_model.addBaseItems(categoryID, nextID));
+    } else if (items.length == 0) columnChildren.addAll(_model.addBaseItems(categoryID, nextID));
+
+    return Column(children: columnChildren);
   }
+
+  // List<Widget> addBaseItems(model, int categoryID, int nextID) {
+  //   List<Widget> columnChildren = [];
+  //   List<Widget> rowChildren = [];
+  //   List<Item> newItems = [];
+  //   model.baseItems(categoryID).forEach((Item base) {
+  //     newItems.add(itemFromBase(base, nextID));
+  //     nextID += 1;
+  //   });
+  //   for (int i = 0; i < newItems.length; i += 2) {
+  //     rowChildren.add(TextInputWidget(item: newItems[i]));
+  //     if (newItems[i + 1].type == 'date')
+  //       rowChildren.add(DateInputWidget(item: newItems[i + 1]));
+  //     else if (newItems[i + 1].type == 'checkbox')
+  //       rowChildren.add(CheckBoxWidget(item: newItems[i + 1]));
+  //     model.addItem(categoryID, newItems[i]);
+  //     model.addItem(categoryID, newItems[i + 1]);
+  //   }
+  //   columnChildren.add(Row(children: rowChildren));
+  //   return columnChildren;
+  // }
+  //
+  // Item itemFromBase(Item baseItem, int nextID) {
+  //   Item item = Item(
+  //       id: nextID,
+  //       categoryID: baseItem.categoryID,
+  //       label: baseItem.label,
+  //       type: baseItem.type,
+  //       hintText: baseItem.hintText,
+  //       lastItem: baseItem.lastItem);
+  //   return item;
+  // }
 }
 
 ///************************************************************************
 class DateInputWidget extends HookWidget {
-  DateInputWidget({Key key, @required this.item}) : super(key: key);
+  DateInputWidget({Key key, @required this.item, this.editComplete}) : super(key: key);
 
   final Item item;
+  final Function editComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +107,8 @@ class DateInputWidget extends HookWidget {
       MaskTextInputFormatter(mask: "##/##/####", filter: {"#": RegExp(r'[0-9]')})
     ];
 
-    var lastItem = false;
-    if (item.lastItem != null && item.lastItem) lastItem = true;
+    var lastItem = item.lastItem != null && item.lastItem;
+    // if (item.lastItem != null && item.lastItem) lastItem = true;
 
     return Flexible(
       flex: 1,
@@ -56,8 +120,11 @@ class DateInputWidget extends HookWidget {
         keyboardType: TextInputType.numberWithOptions(),
         textInputAction: lastItem ? TextInputAction.done : TextInputAction.next,
         onEditingComplete: () {
-          print('onEditingComplete');
+          print('onEditingComplete: [$editComplete]');
           if (lastItem) SystemChannels.textInput.invokeMethod('TextInput.hide');
+          if (editComplete != null) editComplete(item.categoryID);
+
+          editComplete(item.categoryID);
         },
         onFieldSubmitted: (value) {
           print('onFieldSubmitted with VALUE: $value');

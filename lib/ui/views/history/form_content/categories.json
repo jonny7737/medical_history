@@ -68,21 +68,23 @@
     },
     {
       "id": 5,
-      "name": "procedures",
+      "name": "surgery",
       "title": "Surgeries / Procedures",
       "type": "expandable",
-      "items": [
+      "items": [],
+      "baseItems": [
         {
-          "id": 50,
+          "id": 500,
           "label": "surgery1",
           "type": "string",
-          "hintText": "Add a surgery or procedure"
+          "hintText": "Surgery or procedure"
         },
         {
-          "id": 51,
-          "type": "date",
+          "id": 501,
           "label": "surgery1",
-          "hintText": "Date of surgery or procedure"
+          "type": "date",
+          "hintText": "Date of surgery or procedure",
+          "lastItem": true
         }
       ]
     }
