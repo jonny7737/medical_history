@@ -23,7 +23,7 @@ class AppRouter {
     _model.initSectionPref(sectionName);
     bool isLogging = _model.isEnabled(sectionName) && _model.isEnabled(LOGGING_APP);
     if (isLogging)
-      print('[Router.21] => ${settings.name}  Arguments: ${settings.arguments.toString()}');
+      print('[Router.26] => ${settings.name}  Arguments: ${settings.arguments.toString()}');
 
     switch (settings.name) {
       case setupRoute:
@@ -85,7 +85,7 @@ class AppRouter {
           builder: (_) => LoginView(),
         );
       case homeRoute:
-        if (isLogging) print('[Router.83] => About to execute Home route');
+        if (isLogging) print('[Router.88] => About to execute Home route');
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => HomeView(),
           transitionDuration: Duration(milliseconds: 500),
