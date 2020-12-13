@@ -9,11 +9,10 @@ import 'package:medical_history/ui/views/history/models/item.dart';
 ///************************************************************************
 final historyViewModel = ChangeNotifierProvider<HistoryViewModel>((ref) => HistoryViewModel());
 
-class ExpandableInputWidget extends HookWidget {
+class RowInputWidget extends HookWidget {
   // final CategoryServices _cs = locator();
 
-  ExpandableInputWidget({Key key, @required this.items, @required this.categoryID})
-      : super(key: key);
+  RowInputWidget({Key key, @required this.items, @required this.categoryID}) : super(key: key);
 
   final List<Item> items;
   final int categoryID;

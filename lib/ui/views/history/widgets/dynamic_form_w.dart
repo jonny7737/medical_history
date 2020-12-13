@@ -53,7 +53,7 @@ class _DynamicFormState extends State<DynamicForm> {
     // debugPrint('Dynamic form: type = ${_cs.categoryType(widget.categoryID)}');
 
     if (_cs.categoryType(widget.categoryID) == 'expandable')
-      _formWidgets.add(ExpandableInputWidget(items: widget.items, categoryID: widget.categoryID));
+      _formWidgets.add(RowInputWidget(items: widget.items, categoryID: widget.categoryID));
     else
       for (var item in widget.items) {
         switch (item.type) {
