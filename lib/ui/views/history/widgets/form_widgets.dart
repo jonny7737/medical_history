@@ -19,7 +19,7 @@ class RowInputWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Building Expandable...');
+    print('Building RowInput...');
     HistoryViewModel _model = useProvider(historyViewModel);
 
     void updateUI() {
