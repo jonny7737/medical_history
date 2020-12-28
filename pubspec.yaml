@@ -5,7 +5,7 @@ description: Medical history tracker.
 # pub.dev using `pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 2.1.0+1
+version: 2.1.0+2
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -29,7 +29,7 @@ dependencies:
   xml: ^4.5.1
   html: ^0.14.0+4
   http: ^0.12.2
-  mask_text_input_formatter: ^1.1.0
+  mask_text_input_formatter: ^1.2.1
   flutter_secure_storage: ^3.3.5
   encrypt: ^4.1.0
   rflutter_alert: ^1.1.0
@@ -41,13 +41,16 @@ dependencies:
   shaking_icon:
     path: '../shaking_icon'
 
+  # Investigate this package
+  secure_application: ^3.5.3
+
   cupertino_icons: 1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: ^0.8.2
-  build_runner: ^1.10.9
+  build_runner: ^1.10.11
 
 flutter:
   uses-material-design: true

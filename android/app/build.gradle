@@ -37,7 +37,8 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // TODOne: Specify your own unique Application ID (https://developer.android
+        // .com/studio/build/application-id.html).
         applicationId "com.coralpeaks.medical_history"
         minSdkVersion 26
         targetSdkVersion 30
